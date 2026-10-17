@@ -1,85 +1,166 @@
-let mapInstance = null;
+let map;
+let markers = [];
+let currentLang = 'bn';
+let allRecords = [];
 
-async function performSearch() {
+const translations = {
+    bn: {
+        appTitle: "ল্যান্ডট্রাস্ট সিটিজেন পোর্টাল",
+        appSubtitle: "নিরাপদ জমি লেনদেন ও ডিজিটাল খতিয়ান সত্যতা যাচাই প্ল্যাটফর্ম",
+        langBtnText: "English",
+        searchPlaceholder: "দাগ, খতিয়ান, মালিকের নাম বা রেকর্ড আইডি লিখুন (যেমন: P2, P5, 101, 105)...",
+        searchBtn: "🔍 অনুসন্ধান করুন",
+        searchHint: "💡 টিপস: আপনি সরাসরি দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি দিয়ে সার্চ করতে পারেন।",
+        mapCardTitle: "🗺️ ভূমির ভৌগোলিক মানচিত্র (GIS Map)",
+        resultsCardTitle: "📋 ভূমির বিবরণ ও রেকর্ডসমূহ",
+        recordCount: "টি রেকর্ড প্রদর্শিত",
+        footerText: "© ২০২৬ LandTrust Ecosystem | স্মার্ট বাংলাদেশ স্মার্ট ভূমি সেবা",
+        noResult: "⚠️ কোনো তথ্য পাওয়া যায়নি! অন্য দাগ বা আইডি দিয়ে চেষ্টা করুন।",
+        owner: "মালিক:",
+        dag: "দাগ নম্বর:",
+        khation: "খতিয়ান নম্বর:",
+        area: "জমির পরিমাণ:",
+        status: "স্ট্যাটাস:",
+        risk: "ঝুঁকি:"
+    },
+    en: {
+        appTitle: "LandTrust Citizen Portal",
+        appSubtitle: "Secure Land Transaction & Digital Record Verification Platform",
+        langBtnText: "বাংলা",
+        searchPlaceholder: "Enter Dag, Khatian, Owner Name or Record ID (e.g., P2, P5, 101)...",
+        searchBtn: "🔍 Search Record",
+        searchHint: "💡 Tip: You can search directly by Dag No, Khatian or Record ID.",
+        mapCardTitle: "🗺️ GIS Land Location Map",
+        resultsCardTitle: "📋 Land Details & Records",
+        recordCount: "Records Displayed",
+        footerText: "© 2026 LandTrust Ecosystem | Smart Bangladesh Land Services",
+        noResult: "⚠️ No records found! Please try another Dag or ID.",
+        owner: "Owner:",
+        dag: "Dag No:",
+        khation: "Khatian No:",
+        area: "Area:",
+        status: "Status:",
+        risk: "Risk:"
+    }
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+    initMap();
+    loadDefaultRecords();
+});
+
+function initMap() {
+    map = L.map('map').setView([23.8103, 90.4125], 7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+}
+
+function toggleLanguage() {
+    currentLang = currentLang === 'bn' ? 'en' : 'bn';
+    const t = translations[currentLang];
+
+    document.getElementById('appTitle').innerText = t.appTitle;
+    document.getElementById('appSubtitle').innerText = t.appSubtitle;
+    document.getElementById('langBtnText').innerText = t.langBtnText;
+    document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+    document.getElementById('searchBtn').innerText = t.searchBtn;
+    document.getElementById('searchHint').innerText = t.searchHint;
+    document.getElementById('mapCardTitle').innerText = t.mapCardTitle;
+    document.getElementById('resultsCardTitle').innerText = t.resultsCardTitle;
+    document.getElementById('footerText').innerText = t.footerText;
+
+    renderRecords(allRecords);
+}
+
+function loadDefaultRecords() {
+    // P2 (LT-BD-2026-002) and P5 (LT-BD-2026-005) or all records initially
+    fetch('/api/search')
+        .then(res => res.json())
+        .then(data => {
+            // Filter initially for P2 and P5 if exist, or load first few records
+            let defaultData = data.filter(r => 
+                String(r.id).toLowerCase().includes('002') || 
+                String(r.id).toLowerCase().includes('005') ||
+                String(r.id).toLowerCase().includes('p2') || 
+                String(r.id).toLowerCase().includes('p5')
+            );
+            
+            if (defaultData.length === 0) {
+                defaultData = data.slice(0, 5); // Fallback to first 5
+            }
+
+            allRecords = defaultData;
+            renderRecords(allRecords);
+        })
+        .catch(err => console.error("Error loading initial data:", err));
+}
+
+function performSearch() {
     const query = document.getElementById('searchInput').value.trim();
-    const resultsContainer = document.getElementById('resultsContainer');
+    fetch(`/api/search?q=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(data => {
+            allRecords = data;
+            renderRecords(allRecords);
+        });
+}
 
-    if (!query) {
-        resultsContainer.innerHTML = '<p style="color: red; padding: 10px;">অনুগ্রহ করে অনুসন্ধান করার জন্য দাগ নম্বর, খতিয়ান বা আইডি লিখুন।</p>';
+function renderRecords(records) {
+    const container = document.getElementById('resultsContainer');
+    const alertBox = document.getElementById('alertBox');
+    const countBadge = document.getElementById('recordCount');
+    const t = translations[currentLang];
+
+    // Clear map markers
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+    container.innerHTML = "";
+
+    if (records.length === 0) {
+        alertBox.innerText = t.noResult;
+        alertBox.style.display = "block";
+        countBadge.innerText = `0 ${t.recordCount}`;
         return;
     }
 
-    resultsContainer.innerHTML = '<p style="padding: 10px;">তথ্য খোঁজা হচ্ছে...</p>';
+    alertBox.style.display = "none";
+    countBadge.innerText = `${records.length} ${t.recordCount}`;
 
-    try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-        const data = await response.json();
+    let bounds = [];
 
-        if (!data.results || data.results.length === 0) {
-            resultsContainer.innerHTML = `<div style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 6px; margin-top: 10px;">
-                ⚠️ কোনো তথ্য পাওয়া যায়নি। অনুগ্রহ করে অন্য দাগ নম্বর (যেমন: 101, 110, 115) বা ID (যেমন: LT-BD-2026-010) দিয়ে চেষ্টা করুন।
-            </div>`;
-            return;
+    records.forEach(r => {
+        // Build Record HTML Card
+        const item = document.createElement('div');
+        item.className = 'record-item';
+        
+        const riskClass = (r.buyer_risk_report && r.buyer_risk_report.risk_level === 'High') ? 'risk-high' : 
+                          (r.buyer_risk_report && r.buyer_risk_report.risk_level === 'Medium') ? 'risk-med' : 'risk-low';
+
+        item.innerHTML = `
+            <div class="record-header">
+                <span class="record-id">🆔 ${r.id}</span>
+                <span class="risk-badge ${riskClass}">${t.risk} ${r.buyer_risk_report ? r.buyer_risk_report.risk_level : 'Low'}</span>
+            </div>
+            <div class="record-details">
+                <p><strong>${t.owner}</strong> ${r.owner_name}</p>
+                <p><strong>${t.dag}</strong> ${r.dag_no} | <strong>${t.khation}</strong> ${r.khation_no}</p>
+                <p><strong>${t.area}</strong> ${r.land_area_decimal || 'N/A'} শতাংশ</p>
+                <p><strong>${t.status}</strong> ${r.verification_status || 'যাচাইকৃত'}</p>
+            </div>
+        `;
+        container.appendChild(item);
+
+        // Add Marker to Map if coordinates exist
+        if (r.coordinates && r.coordinates.lat && r.coordinates.lng) {
+            const marker = L.marker([r.coordinates.lat, r.coordinates.lng]).addTo(map);
+            marker.bindPopup(`<b>${r.owner_name}</b><br>${t.dag} ${r.dag_no}<br>ID: ${r.id}`);
+            markers.push(marker);
+            bounds.push([r.coordinates.lat, r.coordinates.lng]);
         }
+    });
 
-        let html = `<h3 style="margin-top: 15px;">মোট ফলাফল পাওয়া গেছে: ${data.count} টি</h3>`;
-
-        data.results.forEach((record, index) => {
-            // Risk Color
-            let riskBg = '#28a745'; // Green
-            if (record.risk_report && record.risk_report.score === 'Medium Risk') riskBg = '#ffc107';
-            if (record.risk_report && record.risk_report.score === 'High Risk') riskBg = '#dc3545';
-
-            html += `
-                <div style="border: 1px solid #e0e0e0; background: #ffffff; padding: 20px; border-radius: 10px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                    <h2 style="margin-top:0; color: #2c3e50;">👤 ${record.owner_name} <small style="font-size: 0.6em; color: #7f8c8d;">(${record.record_id})</small></h2>
-                    <p><strong>দাগ নম্বর:</strong> ${record.dag_no} | <strong>খতিয়ান নম্বর:</strong> ${record.khatian_no} | <strong>জমির পরিমাণ:</strong> ${record.land_amount}</p>
-                    <p><strong>নামজারি স্থিতি (Mutation):</strong> <span style="font-weight:bold;">${record.mutation_status}</span></p>
-
-                    <!-- Buyer Risk Report Badge -->
-                    <div style="background: ${riskBg}; color: white; padding: 10px 15px; border-radius: 6px; font-weight: bold; margin: 12px 0; font-size: 0.95em;">
-                        🛡️ Buyer Risk Assessment: ${record.risk_report ? record.risk_report.score : 'N/A'} — ${record.risk_report ? record.risk_report.summary : ''}
-                    </div>
-
-                    <!-- Metadata & Verification -->
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; font-size: 0.9em; line-height: 1.6; border-left: 4px solid #007bff;">
-                        <p style="margin: 3px 0;">📍 <strong>অবস্থান/ঠিকানা:</strong> ${record.location ? record.location.address : 'N/A'}</p>
-                        <p style="margin: 3px 0;">📁 <strong>Data Source:</strong> ${record.data_source || 'N/A'}</p>
-                        <p style="margin: 3px 0;">📅 <strong>Observation Date:</strong> ${record.observation_date || 'N/A'}</p>
-                        <p style="margin: 3px 0;">✅ <strong>Verification Status:</strong> ${record.verification_status || 'N/A'}</p>
-                        ${(record.inconsistencies && record.inconsistencies.length > 0) 
-                            ? `<p style="color: #dc3545; font-weight: bold; margin: 5px 0 0 0;">⚠️ Inconsistency / Conflict: ${record.inconsistencies.join(', ')}</p>` 
-                            : '<p style="color: #28a745; margin: 5px 0 0 0;">✔️ No Inconsistency Detected</p>'}
-                    </div>
-
-                    <!-- Ownership History -->
-                    ${record.history ? `<p style="margin-top: 10px;">📜 <strong>মালিকানার ইতিহাস:</strong> ${record.history.join(' ➔ ')}</p>` : ''}
-
-                    <!-- OpenStreetMap -->
-                    <div id="map-${index}" style="height: 220px; width: 100%; border-radius: 8px; margin-top: 15px; border: 1px solid #ddd;"></div>
-                </div>
-            `;
-        });
-
-        resultsContainer.innerHTML = html;
-
-        // Render OpenStreetMap for each record
-        data.results.forEach((record, index) => {
-            if (record.location && record.location.lat && record.location.lng) {
-                setTimeout(() => {
-                    const map = L.map(`map-${index}`).setView([record.location.lat, record.location.lng], 13);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '© OpenStreetMap'
-                    }).addTo(map);
-                    L.marker([record.location.lat, record.location.lng]).addTo(map)
-                        .bindPopup(`<b>${record.owner_name}</b><br>${record.location.address}`)
-                        .openPopup();
-                }, 100);
-            }
-        });
-
-    } catch (error) {
-        console.error('Error:', error);
-        resultsContainer.innerHTML = '<p style="color: red; padding: 10px;">ডেটা লোড করতে সমস্যা হয়েছে। দয়া করে রিফ্রেশ করে আবার চেষ্টা করুন।</p>';
+    if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [50, 50] });
     }
 }

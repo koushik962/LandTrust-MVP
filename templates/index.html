@@ -3,27 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LandTrust MVP - Land Verification & Risk Report</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Leaflet OpenStreetMap CSS & JS -->
+    <title>LandTrust Citizen Portal | ল্যান্ডট্রাস্ট সিটিজেন পোর্টাল</title>
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>🌱 LandTrust Citizen Portal</h1>
-        <p>দাগ নম্বর, খতিয়ান নম্বর, মালিকের নাম বা রেকর্ড আইডি দিয়ে অনুসন্ধান করুন।</p>
 
-        <!-- Search Form -->
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="যেমন: 101, 501, Rahim, LT-BD-2026-001">
-            <button onclick="performSearch()">অনুসন্ধান করুন</button>
+    <!-- Header Area -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-title">
+                <span class="logo-icon">🌱</span>
+                <div>
+                    <h1 id="appTitle">ল্যান্ডট্রাস্ট সিটিজেন পোর্টাল</h1>
+                    <p id="appSubtitle">নিরাপদ জমি লেনদেন ও ডিজিটাল খতিয়ান সত্যতা যাচাই প্ল্যাটফর্ম</p>
+                </div>
+            </div>
+            <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">
+                🌐 <span id="langBtnText">English</span>
+            </button>
         </div>
+    </header>
 
-        <!-- Search Results Section -->
-        <div id="resultsContainer"></div>
-    </div>
+    <main class="main-container">
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="দাগ, খতিয়ান, মালিকের নাম বা রেকর্ড আইডি লিখুন (যেমন: P2, P5, 101, 105)...">
+                <button onclick="performSearch()" id="searchBtn">🔍 অনুসন্ধান করুন</button>
+            </div>
+            <p class="search-hint" id="searchHint">💡 টিপস: আপনি সরাসরি দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি দিয়ে সার্চ করতে পারেন।</p>
+        </section>
 
+        <!-- Alert Notification -->
+        <div id="alertBox" class="alert-card" style="display: none;"></div>
+
+        <!-- Dashboard Content Grid -->
+        <div class="dashboard-grid">
+            <!-- Map Card -->
+            <div class="card map-card">
+                <div class="card-header">
+                    <h3 id="mapCardTitle">🗺️ ভূমির ভৌগোলিক মানচিত্র (GIS Map)</h3>
+                </div>
+                <div class="card-body">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="card results-card">
+                <div class="card-header">
+                    <h3 id="resultsCardTitle">📋 ভূমির বিবরণ ও রেকর্ডসমূহ</h3>
+                    <span class="badge-count" id="recordCount">২টি রেকর্ড প্রদর্শিত</span>
+                </div>
+                <div class="card-body">
+                    <div id="resultsContainer" class="records-list"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p id="footerText">© ২০২৬ LandTrust Ecosystem | স্মার্ট বাংলাদেশ স্মার্ট ভূমি সেবা</p>
+    </footer>
+
+    <!-- Leaflet JS & App JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
