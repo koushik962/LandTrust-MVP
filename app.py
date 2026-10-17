@@ -2,12 +2,13 @@ import os
 import json
 
 def load_records():
-    # Get the absolute path of the current directory (where app.py is located)
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, "data", "land_records.json")
+    # Absolute path check for Vercel deployment
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "data", "land_records.json")
     
     if not os.path.exists(file_path):
-        return []
+        # Fallback to relative path if absolute fails
+        file_path = "data/land_records.json"
         
     try:
         with open(file_path, "r", encoding="utf-8") as f:
