@@ -1,56 +1,462 @@
 [
   {
-    "record_id": "LT-1001",
-    "owner_name": "Rahim Uddin (Demo)",
+    "record_id": "LT-BD-2026-001",
+    "owner_name": "Rahim Uddin",
     "dag_no": "101",
-    "khatian_no": "55",
-    "land_amount": "10 decimal",
-    "mutation_status": "Completed (sample)",
-    "history": [
-      {
-        "year": "2018",
-        "event": "Sample record created"
-      },
-      {
-        "year": "2022",
-        "event": "Sample mutation marked completed"
-      }
-    ]
+    "khatian_no": "501",
+    "land_amount": "0.45 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 24.8949,
+      "lng": 91.8687,
+      "address": "Mouza: Jalalabad, Sylhet Sadar, Sylhet"
+    },
+    "data_source": "District Registrar Office & CS Ledger",
+    "observation_date": "2026-02-10",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Clear ownership history with valid mutation records.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Korim Uddin (1940)", "SA: Rahim Uddin (1962)", "RS: Rahim Uddin (2010)"]
   },
   {
-    "record_id": "LT-1002",
-    "owner_name": "Karima Akter (Demo)",
-    "dag_no": "205",
-    "khatian_no": "88",
-    "land_amount": "7.5 decimal",
-    "mutation_status": "Pending (sample)",
-    "history": [
-      {
-        "year": "2020",
-        "event": "Sample record created"
-      },
-      {
-        "year": "2024",
-        "event": "Sample mutation marked pending"
-      }
-    ]
+    "record_id": "LT-BD-2026-002",
+    "owner_name": "Fatema Begum",
+    "dag_no": "102",
+    "khatian_no": "502",
+    "land_amount": "0.30 Acres",
+    "mutation_status": "Pending",
+    "location": {
+      "lat": 23.8103,
+      "lng": 90.4125,
+      "address": "Mouza: Badda, Gulshan, Dhaka"
+    },
+    "data_source": "AC Land Office & RS Ledger",
+    "observation_date": "2026-03-01",
+    "verification_status": "Under Review",
+    "inconsistencies": ["RS vs Mutation name spelling mismatch"],
+    "risk_report": {
+      "score": "Medium Risk",
+      "summary": "Mutation is still pending due to name spelling inconsistency.",
+      "conflict_detected": true
+    },
+    "history": ["CS: Abdul Latif (1940)", "SA: Abdul Latif (1965)", "RS: Fatema Begum (2012)"]
   },
   {
-    "record_id": "LT-1003",
-    "owner_name": "Hasan Ali (Demo)",
-    "dag_no": "310",
-    "khatian_no": "102",
-    "land_amount": "12 decimal",
-    "mutation_status": "Needs review (sample)",
-    "history": [
-      {
-        "year": "2019",
-        "event": "Sample record created"
-      },
-      {
-        "year": "2023",
-        "event": "Sample record updated for demo"
-      }
-    ]
+    "record_id": "LT-BD-2026-003",
+    "owner_name": "Kabal Hossain",
+    "dag_no": "103",
+    "khatian_no": "503",
+    "land_amount": "1.20 Acres",
+    "mutation_status": "Rejected",
+    "location": {
+      "lat": 22.3569,
+      "lng": 91.7832,
+      "address": "Mouza: Pahartali, Chittagong"
+    },
+    "data_source": "Land Reforms Board & Local Land Office",
+    "observation_date": "2026-01-15",
+    "verification_status": "Disputed",
+    "inconsistencies": ["Multiple claimants found in RS record", "Apotroho/Encroachment flag"],
+    "risk_report": {
+      "score": "High Risk",
+      "summary": "High risk of ownership conflict! Dual claims registered.",
+      "conflict_detected": true
+    },
+    "history": ["CS: Sultan Ahmed (1938)", "SA: Kashem Ali (1960)", "RS: Disputed (2015)"]
+  },
+  {
+    "record_id": "LT-BD-2026-004",
+    "owner_name": "Anisur Rahman",
+    "dag_no": "104",
+    "khatian_no": "504",
+    "land_amount": "0.75 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 24.3636,
+      "lng": 88.6241,
+      "address": "Mouza: Boalia, Rajshahi"
+    },
+    "data_source": "e-Mutation Portal & CS Record",
+    "observation_date": "2026-04-05",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Fully verified and legal mutation completed.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Habibur Rahman (1942)", "RS: Anisur Rahman (2008)"]
+  },
+  {
+    "record_id": "LT-BD-2026-005",
+    "owner_name": "Nusrat Jahan",
+    "dag_no": "105",
+    "khatian_no": "505",
+    "land_amount": "0.15 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 22.8456,
+      "lng": 89.5403,
+      "address": "Mouza: Sonadanga, Khulna"
+    },
+    "data_source": "Khulna Collectorate Office",
+    "observation_date": "2026-02-20",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Clean record with no legal encumbrances.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Jahangir Alam (1945)", "RS: Nusrat Jahan (2018)"]
+  },
+  {
+    "record_id": "LT-BD-2026-006",
+    "owner_name": "Tariqul Islam",
+    "dag_no": "106",
+    "khatian_no": "506",
+    "land_amount": "2.50 Acres",
+    "mutation_status": "Pending",
+    "location": {
+      "lat": 24.7471,
+      "lng": 90.4203,
+      "address": "Mouza: Keyotkhali, Mymensingh"
+    },
+    "data_source": "District Sub-Registry Office",
+    "observation_date": "2026-03-12",
+    "verification_status": "Under Review",
+    "inconsistencies": ["Land area mismatch between Deed and Khatian"],
+    "risk_report": {
+      "score": "Medium Risk",
+      "summary": "A 0.20 acre discrepancy detected between deed and khatian.",
+      "conflict_detected": true
+    },
+    "history": ["CS: Mokbul Hossain (1941)", "RS: Tariqul Islam (2011)"]
+  },
+  {
+    "record_id": "LT-BD-2026-007",
+    "owner_name": "Shahana Akter",
+    "dag_no": "107",
+    "khatian_no": "507",
+    "land_amount": "0.50 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 25.7439,
+      "lng": 89.2752,
+      "address": "Mouza: Central Road, Rangpur"
+    },
+    "data_source": "e-Porcha Portal",
+    "observation_date": "2026-01-30",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Verified via e-Porcha database.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Joynal Abedin (1939)", "RS: Shahana Akter (2014)"]
+  },
+  {
+    "record_id": "LT-BD-2026-008",
+    "owner_name": "Monirul Haque",
+    "dag_no": "108",
+    "khatian_no": "508",
+    "land_amount": "1.00 Acres",
+    "mutation_status": "Rejected",
+    "location": {
+      "lat": 22.7010,
+      "lng": 90.3535,
+      "address": "Mouza: Sadar Road, Barisal"
+    },
+    "data_source": "Barisal AC Land Office",
+    "observation_date": "2026-02-01",
+    "verification_status": "Disputed",
+    "inconsistencies": ["Government Vested Property tag attached"],
+    "risk_report": {
+      "score": "High Risk",
+      "summary": "Property flagged as Vested Property (Arpitro Shompotti).",
+      "conflict_detected": true
+    },
+    "history": ["CS: Ramesh Chandra (1940)", "SA: Govt Vested (1965)", "RS: Monirul Haque (Claimed)"]
+  },
+  {
+    "record_id": "LT-BD-2026-009",
+    "owner_name": "Kamrul Hassan",
+    "dag_no": "109",
+    "khatian_no": "509",
+    "land_amount": "0.80 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 23.9999,
+      "lng": 90.4203,
+      "address": "Mouza: Board Bazar, Gazipur"
+    },
+    "data_source": "Gazipur Land Record Room",
+    "observation_date": "2026-03-22",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "All survey records (CS, SA, RS, BS) match seamlessly.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Sirajul Islam (1943)", "SA: Sirajul Islam (1968)", "BS: Kamrul Hassan (2020)"]
+  },
+  {
+    "record_id": "LT-BD-2026-010",
+    "owner_name": "Laila Arjumand",
+    "dag_no": "110",
+    "khatian_no": "510",
+    "land_amount": "0.35 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 23.4607,
+      "lng": 91.1809,
+      "address": "Mouza: Kandirpar, Comilla"
+    },
+    "data_source": "Comilla Sadar Registry",
+    "observation_date": "2026-04-01",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "No conflicts found.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Delwar Hossain (1940)", "RS: Laila Arjumand (2016)"]
+  },
+  {
+    "record_id": "LT-BD-2026-011",
+    "owner_name": "Ziaur Rahman",
+    "dag_no": "111",
+    "khatian_no": "511",
+    "land_amount": "0.60 Acres",
+    "mutation_status": "Pending",
+    "location": {
+      "lat": 23.7272,
+      "lng": 90.4093,
+      "address": "Mouza: Motijheel, Dhaka"
+    },
+    "data_source": "RAJUK & Land Office",
+    "observation_date": "2026-03-18",
+    "verification_status": "Under Review",
+    "inconsistencies": ["Inheritance (Warish) certificate pending verification"],
+    "risk_report": {
+      "score": "Medium Risk",
+      "summary": "Warish certificate requires local Union Parishad verification.",
+      "conflict_detected": true
+    },
+    "history": ["CS: Bazlur Rahman (1944)", "RS: Ziaur Rahman (2022)"]
+  },
+  {
+    "record_id": "LT-BD-2026-012",
+    "owner_name": "Farhana Chowdhury",
+    "dag_no": "112",
+    "khatian_no": "512",
+    "land_amount": "0.40 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 24.8917,
+      "lng": 91.8700,
+      "address": "Mouza: Zindabazar, Sylhet"
+    },
+    "data_source": "Sylhet Municipal Records",
+    "observation_date": "2026-02-28",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Verified buyer-friendly record.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Mahmud Chowdhury (1938)", "RS: Farhana Chowdhury (2010)"]
+  },
+  {
+    "record_id": "LT-BD-2026-013",
+    "owner_name": "Babul Miah",
+    "dag_no": "113",
+    "khatian_no": "513",
+    "land_amount": "3.10 Acres",
+    "mutation_status": "Rejected",
+    "location": {
+      "lat": 23.9888,
+      "lng": 91.1123,
+      "address": "Mouza: Brahmanbaria Sadar"
+    },
+    "data_source": "District Civil Court Records",
+    "observation_date": "2026-01-10",
+    "verification_status": "Disputed",
+    "inconsistencies": ["Active civil litigation (Injunction Order)"],
+    "risk_report": {
+      "score": "High Risk",
+      "summary": "Court injunction active! Buying/selling strictly prohibited.",
+      "conflict_detected": true
+    },
+    "history": ["CS: Babul Miah (1950)", "Litigation Ongoing (2024)"]
+  },
+  {
+    "record_id": "LT-BD-2026-014",
+    "owner_name": "Rokon Uddin",
+    "dag_no": "114",
+    "khatian_no": "514",
+    "land_amount": "0.90 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 24.1872,
+      "lng": 90.1102,
+      "address": "Mouza: Tangail Sadar"
+    },
+    "data_source": "e-Mutation Database",
+    "observation_date": "2026-03-05",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Clear land title.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Afsar Ali (1942)", "RS: Rokon Uddin (2015)"]
+  },
+  {
+    "record_id": "LT-BD-2026-015",
+    "owner_name": "Sabina Yasmin",
+    "dag_no": "115",
+    "khatian_no": "515",
+    "land_amount": "0.25 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 23.6238,
+      "lng": 90.4990,
+      "address": "Mouza: Narayanganj Sadar"
+    },
+    "data_source": "Narayanganj Registry Office",
+    "observation_date": "2026-04-10",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "100% verified mutation and ownership.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Solaiman Khan (1945)", "BS: Sabina Yasmin (2021)"]
+  },
+  {
+    "record_id": "LT-BD-2026-016",
+    "owner_name": "Imtiaz Ahmed",
+    "dag_no": "116",
+    "khatian_no": "516",
+    "land_amount": "1.50 Acres",
+    "mutation_status": "Pending",
+    "location": {
+      "lat": 25.6279,
+      "lng": 88.6332,
+      "address": "Mouza: Dinajpur Sadar"
+    },
+    "data_source": "Dinajpur Collectorate",
+    "observation_date": "2026-02-14",
+    "verification_status": "Under Review",
+    "inconsistencies": ["Tax payment overdue since 2021"],
+    "risk_report": {
+      "score": "Medium Risk",
+      "summary": "Land development tax unpaid for last 5 years.",
+      "conflict_detected": true
+    },
+    "history": ["CS: Imtiaz Ahmed (1960)"]
+  },
+  {
+    "record_id": "LT-BD-2026-017",
+    "owner_name": "Mehedi Hasan",
+    "dag_no": "117",
+    "khatian_no": "517",
+    "land_amount": "0.65 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 23.1634,
+      "lng": 89.2182,
+      "address": "Mouza: Jessore Sadar"
+    },
+    "data_source": "e-Porcha Portal",
+    "observation_date": "2026-03-30",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Clean and conflict-free record.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Kashem Hossain (1941)", "RS: Mehedi Hasan (2017)"]
+  },
+  {
+    "record_id": "LT-BD-2026-018",
+    "owner_name": "Sultana Razia",
+    "dag_no": "118",
+    "khatian_no": "518",
+    "land_amount": "0.20 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 23.8120,
+      "lng": 90.3654,
+      "address": "Mouza: Mirpur, Dhaka"
+    },
+    "data_source": "Dhaka Sub-Registry Office",
+    "observation_date": "2026-04-12",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "Verified residential plot.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Ali Akbar (1940)", "BS: Sultana Razia (2019)"]
+  },
+  {
+    "record_id": "LT-BD-2026-019",
+    "owner_name": "Asaduzzaman",
+    "dag_no": "119",
+    "khatian_no": "519",
+    "land_amount": "4.00 Acres",
+    "mutation_status": "Rejected",
+    "location": {
+      "lat": 21.4272,
+      "lng": 92.0058,
+      "address": "Mouza: Cox's Bazar Sadar"
+    },
+    "data_source": "Forest Department & AC Land",
+    "observation_date": "2026-01-05",
+    "verification_status": "Disputed",
+    "inconsistencies": ["Overlaps with Protected Forest Land"],
+    "risk_report": {
+      "score": "High Risk",
+      "summary": "Overlap with government forest land detected!",
+      "conflict_detected": true
+    },
+    "history": ["CS: Asaduzzaman (1965)", "Forest Claim (2010)"]
+  },
+  {
+    "record_id": "LT-BD-2026-020",
+    "owner_name": "Habibullah Khan",
+    "dag_no": "120",
+    "khatian_no": "520",
+    "land_amount": "0.55 Acres",
+    "mutation_status": "Mutated",
+    "location": {
+      "lat": 24.0958,
+      "lng": 90.3245,
+      "address": "Mouza: Sreepur, Gazipur"
+    },
+    "data_source": "Sreepur Land Office",
+    "observation_date": "2026-03-25",
+    "verification_status": "Verified",
+    "inconsistencies": [],
+    "risk_report": {
+      "score": "Low Risk",
+      "summary": "100% authentic land title.",
+      "conflict_detected": false
+    },
+    "history": ["CS: Habibullah Khan (1955)", "RS: Habibullah Khan (2012)"]
   }
 ]
