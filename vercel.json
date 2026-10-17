@@ -3,12 +3,7 @@
   "builds": [
     {
       "src": "app.py",
-      "use": "@vercel/python",
-      "config": {
-        "includeFiles": [
-          "data/**"
-        ]
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
