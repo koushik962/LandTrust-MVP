@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LandTrust Citizen Portal | জমি যাচাই ও প্রতারণা প্রতিরোধ</title>
+    <title>LandTrust Citizen Portal | ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Google Fonts -->
@@ -16,10 +16,10 @@
     <header class="app-header">
         <div class="header-container">
             <div class="logo-title">
-                <span class="logo-icon">🛡️</span>
+                <span class="logo-icon">🌿</span>
                 <div>
-                    <h1 id="appTitle">ল্যান্ডট্রাস্ট সিটিজেন পোর্টাল</h1>
-                    <p id="appSubtitle">নিরাপদ জমি লেনদেন, মালিকানা সত্যতা ও জালিয়াতি প্রতিরোধ সিস্টেম</p>
+                    <h1 id="appTitle">ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা</h1>
+                    <p id="appSubtitle">স্মার্ট উপায়ে জমির মালিকানা সত্যতা যাচাই ও জালিয়াতি প্রতিরোধ পোর্টাল</p>
                 </div>
             </div>
             <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">
@@ -32,10 +32,10 @@
         <!-- Search Bar -->
         <section class="search-section">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="দাগ, খতিয়ান, মালিকের নাম বা রেকর্ড আইডি (যেমন: P2, P5, LT-BD-2026-002)...">
-                <button onclick="performSearch()" id="searchBtn">🔍 অনুসন্ধান করুন</button>
+                <input type="text" id="searchInput" placeholder="শুধু দাগ নম্বর, খতিয়ান বা মালিকের নাম লিখুন (যেমন: 101, 102, রহিম)...">
+                <button onclick="performSearch()" id="searchBtn">🔍 তথ্য খুঁজুন</button>
             </div>
-            <p class="search-hint" id="searchHint">💡 টিপস: P2 (দলিল ও মালিকানা) অথবা P5 (কেনার আগে ঝুঁকি রিপোর্ট) দেখতে সরাসরি সার্চ করুন।</p>
+            <p class="search-hint" id="searchHint">💡 টিপস: আপনার জমার দাগ নম্বর বা খতিয়ান নম্বর দিয়ে খুঁজলে জমির ম্যাপ ও সুরক্ষা রিপোর্ট চলে আসবে।</p>
         </section>
 
         <div id="alertBox" class="alert-card" style="display: none;"></div>
@@ -43,40 +43,40 @@
         <!-- GIS Map Section -->
         <div class="card map-card">
             <div class="card-header">
-                <h3 id="mapCardTitle">📍 ভূমির সঠিক ভৌগোলিক অবস্থান (GIS Location Map)</h3>
+                <h3 id="mapCardTitle">📍 ভূমির সঠিক অবস্থান ও সীমানা (GIS Map)</h3>
             </div>
             <div class="card-body">
                 <div id="map"></div>
             </div>
         </div>
 
-        <!-- Modules Tabs (P2 and P5) -->
+        <!-- Modules Tabs -->
         <div class="card module-card">
             <div class="tab-header">
-                <button class="tab-btn active" id="tabP2" onclick="switchTab('P2')">
-                    📜 P2: Verify Deeds & Ownership (দলিল ও মালিকানা)
+                <button class="tab-btn active" id="tabDeeds" onclick="switchTab('DEEDS')">
+                    📜 দলিল ও মালিকানা সত্যতা যাচাই
                 </button>
-                <button class="tab-btn" id="tabP5" onclick="switchTab('P5')">
-                    🔍 P5: Check Before You Buy (ক্রিমিনাল ও জালিয়াতি রিপোর্ট)
+                <button class="tab-btn" id="tabFraud" onclick="switchTab('FRAUD')">
+                    🛡️ ক্রেতা সুরক্ষা ও জালিয়াতি প্রতিরোধ রিপোর্ট
                 </button>
             </div>
             
             <div class="card-body">
-                <!-- P2 Content -->
-                <div id="viewP2" class="tab-content active">
-                    <div id="p2RecordsContainer" class="records-grid"></div>
+                <!-- Deeds & Ownership Content -->
+                <div id="viewDeeds" class="tab-content active">
+                    <div id="deedsRecordsContainer" class="records-grid"></div>
                 </div>
 
-                <!-- P5 Content -->
-                <div id="viewP5" class="tab-content">
-                    <div id="p5RecordsContainer" class="records-grid"></div>
+                <!-- Anti-Fraud Risk Content -->
+                <div id="viewFraud" class="tab-content">
+                    <div id="fraudRecordsContainer" class="records-grid"></div>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="app-footer">
-        <p id="footerText">© ২০২৬ LandTrust Ecosystem | স্মার্ট বাংলাদেশ স্মার্ট ভূমি সেবা</p>
+        <p id="footerText">© ২০২৬ LandTrust Ecosystem | নিরাপদ ভূমি লেনদেন সেবা</p>
     </footer>
 
     <!-- Leaflet JS & App JS -->

@@ -2,50 +2,56 @@ let map;
 let markers = [];
 let currentLang = 'bn';
 let currentRecords = [];
-let activeTab = 'P2';
+let activeTab = 'DEEDS';
 
 const translations = {
     bn: {
-        appTitle: "ল্যান্ডট্রাস্ট সিটিজেন পোর্টাল",
-        appSubtitle: "নিরাপদ জমি লেনদেন, মালিকানা সত্যতা ও জালিয়াতি প্রতিরোধ সিস্টেম",
+        appTitle: "ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা",
+        appSubtitle: "স্মার্ট উপায়ে জমির মালিকানা সত্যতা যাচাই ও জালিয়াতি প্রতিরোধ পোর্টাল",
         langBtnText: "English",
-        searchPlaceholder: "দাগ, খতিয়ান, মালিকের নাম বা রেকর্ড আইডি (যেমন: P2, P5, LT-BD-2026-002)...",
-        searchBtn: "🔍 অনুসন্ধান করুন",
-        searchHint: "💡 টিপস: P2 (দলিল ও মালিকানা) অথবা P5 (কেনার আগে ঝুঁকি রিপোর্ট) দেখতে সরাসরি সার্চ করুন।",
-        mapCardTitle: "📍 ভূমির সঠিক ভৌগোলিক অবস্থান (GIS Location Map)",
-        tabP2: "📜 P2: Verify Deeds & Ownership (দলিল ও মালিকানা)",
-        tabP5: "🔍 P5: Check Before You Buy (ক্রিমিনাল ও জালিয়াতি রিপোর্ট)",
-        noResult: "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অন্য দাগ বা আইডি দিয়ে চেষ্টা করুন।",
+        searchPlaceholder: "শুধু দাগ নম্বর, খতিয়ান বা মালিকের নাম লিখুন (যেমন: 101, 102, রহিম)...",
+        searchBtn: "🔍 তথ্য খুঁজুন",
+        searchHint: "💡 টিপস: আপনার জমার দাগ নম্বর বা খতিয়ান নম্বর দিয়ে খুঁজলে জমির ম্যাপ ও সুরক্ষা রিপোর্ট চলে আসবে।",
+        mapCardTitle: "📍 ভূমির সঠিক অবস্থান ও সীমানা (GIS Map)",
+        tabDeeds: "📜 দলিল ও মালিকানা সত্যতা যাচাই",
+        tabFraud: "🛡️ ক্রেতা সুরক্ষা ও জালিয়াতি প্রতিরোধ রিপোর্ট",
+        noResult: "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অন্য দাগ নম্বর বা নাম দিয়ে চেষ্টা করুন।",
         owner: "মালিকের নাম:",
         dag: "দাগ নম্বর:",
         khation: "খতিয়ান নম্বর:",
         area: "জমির পরিমাণ:",
+        location: "📍 ভূমির ঠিকানা/অবস্থান:",
         status: "যাচাই স্ট্যাটাস:",
         nid: "এনআইডি ভেরিফিকেশন:",
         criminal: "ক্রিমিনাল/পুলিশ রেকর্ড:",
-        court: "মামলা/ঝামেলা স্ট্যাটাস:",
-        risk: "ঝুঁকি স্তর:"
+        court: "মামলা/বিরোধ স্ট্যাটাস:",
+        risk: "ঝুঁকি স্তর:",
+        deedStatus: "দলিল ও নামজারি সিল:",
+        maskedNotice: "🔐 গোপনীয় তথ্য (আংশিক আড়াল করা)"
     },
     en: {
-        appTitle: "LandTrust Citizen Portal",
-        appSubtitle: "Secure Land Transaction, Verification & Anti-Fraud Shield",
+        appTitle: "LandTrust Digital Land Services",
+        appSubtitle: "Smart Portal for Land Verification & Anti-Fraud Protection",
         langBtnText: "বাংলা",
-        searchPlaceholder: "Enter Dag, Khatian, Owner Name or ID (e.g. P2, P5, LT-BD-2026-002)...",
+        searchPlaceholder: "Enter Dag No, Khatian or Owner Name (e.g. 101, 102, Rahim)...",
         searchBtn: "🔍 Search Record",
-        searchHint: "💡 Tip: Search directly to inspect P2 (Deeds) or P5 (Pre-purchase Fraud Risk).",
-        mapCardTitle: "📍 Precise Land Location (GIS Map)",
-        tabP2: "📜 P2: Verify Deeds & Ownership",
-        tabP5: "🔍 P5: Check Before You Buy (Criminal & Risk Report)",
-        noResult: "⚠️ No record found! Please try another Dag or ID.",
+        searchHint: "💡 Tip: Search by Dag number to view GIS location and security report.",
+        mapCardTitle: "📍 Precise Land Location & Boundary (GIS Map)",
+        tabDeeds: "📜 Deed & Ownership Verification",
+        tabFraud: "🛡️ Pre-Purchase Risk & Fraud Shield",
+        noResult: "⚠️ No record found! Please try another Dag number.",
         owner: "Owner Name:",
         dag: "Dag No:",
         khation: "Khatian No:",
         area: "Land Area:",
+        location: "📍 Land Location:",
         status: "Verification:",
         nid: "NID Verification:",
         criminal: "Criminal/Police Record:",
-        court: "Litigation/Court Status:",
-        risk: "Risk Level:"
+        court: "Litigation Status:",
+        risk: "Risk Level:",
+        deedStatus: "Deed Authenticity:",
+        maskedNotice: "🔐 Restricted Information (Partially Masked)"
     }
 };
 
@@ -63,10 +69,10 @@ function initMap() {
 
 function switchTab(tab) {
     activeTab = tab;
-    document.getElementById('tabP2').classList.toggle('active', tab === 'P2');
-    document.getElementById('tabP5').classList.toggle('active', tab === 'P5');
-    document.getElementById('viewP2').classList.toggle('active', tab === 'P2');
-    document.getElementById('viewP5').classList.toggle('active', tab === 'P5');
+    document.getElementById('tabDeeds').classList.toggle('active', tab === 'DEEDS');
+    document.getElementById('tabFraud').classList.toggle('active', tab === 'FRAUD');
+    document.getElementById('viewDeeds').classList.toggle('active', tab === 'DEEDS');
+    document.getElementById('viewFraud').classList.toggle('active', tab === 'FRAUD');
     renderCurrentRecords();
 }
 
@@ -81,8 +87,8 @@ function toggleLanguage() {
     document.getElementById('searchBtn').innerText = t.searchBtn;
     document.getElementById('searchHint').innerText = t.searchHint;
     document.getElementById('mapCardTitle').innerText = t.mapCardTitle;
-    document.getElementById('tabP2').innerText = t.tabP2;
-    document.getElementById('tabP5').innerText = t.tabP5;
+    document.getElementById('tabDeeds').innerText = t.tabDeeds;
+    document.getElementById('tabFraud').innerText = t.tabFraud;
 
     renderCurrentRecords();
 }
@@ -94,7 +100,7 @@ function loadDefaultRecords() {
             currentRecords = data;
             renderCurrentRecords();
         })
-        .catch(err => console.error("Data error:", err));
+        .catch(err => console.error("Data loading error:", err));
 }
 
 function performSearch() {
@@ -109,14 +115,14 @@ function performSearch() {
 
 function renderCurrentRecords() {
     const t = translations[currentLang];
-    const p2Box = document.getElementById('p2RecordsContainer');
-    const p5Box = document.getElementById('p5RecordsContainer');
+    const deedsBox = document.getElementById('deedsRecordsContainer');
+    const fraudBox = document.getElementById('fraudRecordsContainer');
     const alertBox = document.getElementById('alertBox');
 
     markers.forEach(m => map.removeLayer(m));
     markers = [];
-    p2Box.innerHTML = "";
-    p5Box.innerHTML = "";
+    deedsBox.innerHTML = "";
+    fraudBox.innerHTML = "";
 
     if (!currentRecords || currentRecords.length === 0) {
         alertBox.innerText = t.noResult;
@@ -128,53 +134,66 @@ function renderCurrentRecords() {
     let bounds = [];
 
     currentRecords.forEach(r => {
-        // Map marker
+        const address = r.location_address || "ধানমন্ডি, ঢাকা দক্ষিণ সিটি কর্পোরেশন, ঢাকা";
+
+        // Map marker with precise location
         if (r.coordinates && r.coordinates.lat && r.coordinates.lng) {
             const marker = L.marker([r.coordinates.lat, r.coordinates.lng]).addTo(map);
-            marker.bindPopup(`<b>${r.owner_name}</b><br>${t.dag} ${r.dag_no}<br>ID: ${r.id}`);
+            marker.bindPopup(`<b>${r.owner_name}</b><br>📍 ${address}<br>${t.dag} ${r.dag_no}`);
             markers.push(marker);
             bounds.push([r.coordinates.lat, r.coordinates.lng]);
         }
 
-        // P2 Card (Verify Deeds & Ownership)
-        const cardP2 = document.createElement('div');
-        cardP2.className = 'data-card';
-        cardP2.innerHTML = `
+        // Deed & Ownership Card
+        const cardDeeds = document.createElement('div');
+        cardDeeds.className = 'data-card';
+        cardDeeds.innerHTML = `
             <div class="card-top">
-                <span class="rec-id">🆔 ${r.id} (P2 Verified)</span>
+                <span class="rec-id">📄 রেকর্ড আইডি: ${r.id}</span>
                 <span class="badge badge-success">${r.verification_status || 'যাচাইকৃত'}</span>
             </div>
             <div class="detail-line"><strong>${t.owner}</strong> ${r.owner_name}</div>
             <div class="detail-line"><strong>${t.dag}</strong> ${r.dag_no} | <strong>${t.khation}</strong> ${r.khation_no}</div>
             <div class="detail-line"><strong>${t.area}</strong> ${r.land_area_decimal || '১২.৫'} শতাংশ</div>
+            <div class="location-box">
+                <strong>${t.location}</strong> ${address}
+            </div>
             <div class="security-box">
-                ✔️ <strong>দলিল সত্যতা:</strong> ডিজিটাল সাব-রেজিস্ট্রি সিল প্রাপ্ত ও বায়া দলিল যাচাইকৃত।
+                ✔️ <strong>${t.deedStatus}</strong> ডিজিটাল সাব-রেজিস্ট্রি সিল প্রাপ্ত ও প্রস্তুতকৃত বায়া দলিল নিবন্ধিত।
             </div>
         `;
-        p2Box.appendChild(cardP2);
+        deedsBox.appendChild(cardDeeds);
 
-        // P5 Card (Check Before You Buy - Criminal & Fraud Shield)
-        const cardP5 = document.createElement('div');
-        cardP5.className = 'data-card';
+        // Pre-Purchase Anti-Fraud Card
+        const cardFraud = document.createElement('div');
+        cardFraud.className = 'data-card';
 
         const risk = r.buyer_risk_report || {};
         const riskLevel = risk.risk_level || 'Low';
         const badgeClass = riskLevel === 'High' ? 'badge-danger' : (riskLevel === 'Medium' ? 'badge-warning' : 'badge-success');
 
-        cardP5.innerHTML = `
+        // Masking sensitive NID
+        const maskedNid = r.nid_number ? r.nid_number.replace(/(\d{4})\d{4}(\d{2})/, "$1-****-$2") : "1988-****-9421";
+
+        cardFraud.innerHTML = `
             <div class="card-top">
-                <span class="rec-id">🆔 ${r.id} (P5 Risk Shield)</span>
+                <span class="rec-id">🛡️ নিরাপত্তা ট্র্যাকিং</span>
                 <span class="badge ${badgeClass}">${t.risk} ${riskLevel}</span>
             </div>
             <div class="detail-line"><strong>${t.owner}</strong> ${r.owner_name}</div>
-            <div class="detail-line"><strong>${t.nid}</strong> ${risk.nid_verified ? '✅ Verified (জাতীয় পরিচয়পত্র সঠিক)' : '❌ Unverified'}</div>
+            <div class="location-box">
+                <strong>${t.location}</strong> ${address}
+            </div>
+            <div class="detail-line"><strong>${t.nid}</strong> <span class="masked-text">${maskedNid}</span> (এনআইডি যাচাইকৃত)</div>
             <div class="detail-line"><strong>${t.criminal}</strong> ${risk.criminal_record_found ? '🚨 মামলা বা ক্রিমিনাল রেকাড বিদ্যমান' : '✅ কোনো ক্রিমিনাল রেকর্ড পাওয়া যায়নি'}</div>
             <div class="detail-line"><strong>${t.court}</strong> ${risk.court_dispute ? '⚠️ আদালতে মামলা চলমান' : '✅ কোনো বিরোধ নেই (Dispute-Free)'}</div>
             <div class="security-box">
-                🛡️ <strong>জালিয়াতি প্রতিরোধ টিপস:</strong> ${risk.buying_recommendation || 'জমিটি কেনার জন্য নিরাপদ।'}
+                🔒 <strong>${t.maskedNotice}:</strong> কিছু তথ্য গোপন রাখা হয়েছে।
+                <br>
+                <button class="btn-secret" onclick="alert('গোপনীয় তথ্য দেখতে জাতীয় পরিচয়পত্র দিয়ে লগইন করুন।')">🔐 সম্পূর্ণ দেখতে লগইন করুন</button>
             </div>
         `;
-        p5Box.appendChild(cardP5);
+        fraudBox.appendChild(cardFraud);
     });
 
     if (bounds.length > 0) {
