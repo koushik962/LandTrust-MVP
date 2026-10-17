@@ -2,12 +2,11 @@ import os
 import json
 
 def load_records():
-    # Absolute path check for Vercel deployment
+    # Vercel-এর জন্য absolute path
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, "data", "land_records.json")
     
     if not os.path.exists(file_path):
-        # Fallback to relative path if absolute fails
         file_path = "data/land_records.json"
         
     try:
