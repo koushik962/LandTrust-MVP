@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LandTrust Citizen Portal | ল্যান্ডট্রাস্ট সিটিজেন পোর্টাল</title>
+    <title>LandTrust Citizen Portal | জমি যাচাই ও প্রতারণা প্রতিরোধ</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <!-- Header Area -->
+    <!-- App Header -->
     <header class="app-header">
         <div class="header-container">
             <div class="logo-title">
-                <span class="logo-icon">🌱</span>
+                <span class="logo-icon">🛡️</span>
                 <div>
                     <h1 id="appTitle">ল্যান্ডট্রাস্ট সিটিজেন পোর্টাল</h1>
-                    <p id="appSubtitle">নিরাপদ জমি লেনদেন ও ডিজিটাল খতিয়ান সত্যতা যাচাই প্ল্যাটফর্ম</p>
+                    <p id="appSubtitle">নিরাপদ জমি লেনদেন, মালিকানা সত্যতা ও জালিয়াতি প্রতিরোধ সিস্টেম</p>
                 </div>
             </div>
             <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">
@@ -29,38 +29,47 @@
     </header>
 
     <main class="main-container">
-        <!-- Search Section -->
+        <!-- Search Bar -->
         <section class="search-section">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="দাগ, খতিয়ান, মালিকের নাম বা রেকর্ড আইডি লিখুন (যেমন: P2, P5, 101, 105)...">
+                <input type="text" id="searchInput" placeholder="দাগ, খতিয়ান, মালিকের নাম বা রেকর্ড আইডি (যেমন: P2, P5, LT-BD-2026-002)...">
                 <button onclick="performSearch()" id="searchBtn">🔍 অনুসন্ধান করুন</button>
             </div>
-            <p class="search-hint" id="searchHint">💡 টিপস: আপনি সরাসরি দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি দিয়ে সার্চ করতে পারেন।</p>
+            <p class="search-hint" id="searchHint">💡 টিপস: P2 (দলিল ও মালিকানা) অথবা P5 (কেনার আগে ঝুঁকি রিপোর্ট) দেখতে সরাসরি সার্চ করুন।</p>
         </section>
 
-        <!-- Alert Notification -->
         <div id="alertBox" class="alert-card" style="display: none;"></div>
 
-        <!-- Dashboard Content Grid -->
-        <div class="dashboard-grid">
-            <!-- Map Card -->
-            <div class="card map-card">
-                <div class="card-header">
-                    <h3 id="mapCardTitle">🗺️ ভূমির ভৌগোলিক মানচিত্র (GIS Map)</h3>
-                </div>
-                <div class="card-body">
-                    <div id="map"></div>
-                </div>
+        <!-- GIS Map Section -->
+        <div class="card map-card">
+            <div class="card-header">
+                <h3 id="mapCardTitle">📍 ভূমির সঠিক ভৌগোলিক অবস্থান (GIS Location Map)</h3>
             </div>
+            <div class="card-body">
+                <div id="map"></div>
+            </div>
+        </div>
 
-            <!-- Results Section -->
-            <div class="card results-card">
-                <div class="card-header">
-                    <h3 id="resultsCardTitle">📋 ভূমির বিবরণ ও রেকর্ডসমূহ</h3>
-                    <span class="badge-count" id="recordCount">২টি রেকর্ড প্রদর্শিত</span>
+        <!-- Modules Tabs (P2 and P5) -->
+        <div class="card module-card">
+            <div class="tab-header">
+                <button class="tab-btn active" id="tabP2" onclick="switchTab('P2')">
+                    📜 P2: Verify Deeds & Ownership (দলিল ও মালিকানা)
+                </button>
+                <button class="tab-btn" id="tabP5" onclick="switchTab('P5')">
+                    🔍 P5: Check Before You Buy (ক্রিমিনাল ও জালিয়াতি রিপোর্ট)
+                </button>
+            </div>
+            
+            <div class="card-body">
+                <!-- P2 Content -->
+                <div id="viewP2" class="tab-content active">
+                    <div id="p2RecordsContainer" class="records-grid"></div>
                 </div>
-                <div class="card-body">
-                    <div id="resultsContainer" class="records-list"></div>
+
+                <!-- P5 Content -->
+                <div id="viewP5" class="tab-content">
+                    <div id="p5RecordsContainer" class="records-grid"></div>
                 </div>
             </div>
         </div>

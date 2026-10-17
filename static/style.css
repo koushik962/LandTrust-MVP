@@ -2,12 +2,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Hind Siliguri', 'Inter', sans-serif;
+    font-family: 'Hind Siliguri', sans-serif;
 }
 
 body {
-    background-color: #f0f4f2;
-    color: #2d3748;
+    background-color: #f2f5f8;
+    color: #2c3e50;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -15,10 +15,10 @@ body {
 
 /* Header */
 .app-header {
-    background: linear-gradient(135deg, #1b4d3e 0%, #0d2b22 100%);
+    background: linear-gradient(135deg, #1e4d38 0%, #0c2b1e 100%);
     color: white;
     padding: 20px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .header-container {
@@ -37,9 +37,9 @@ body {
 }
 
 .logo-icon {
-    font-size: 36px;
-    background: rgba(255,255,255,0.1);
-    padding: 8px 12px;
+    font-size: 38px;
+    background: rgba(255,255,255,0.12);
+    padding: 8px 14px;
     border-radius: 12px;
 }
 
@@ -54,22 +54,21 @@ body {
 }
 
 .lang-btn {
-    background: #2e7d32;
+    background: #27ae60;
     color: white;
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 8px 16px;
+    border: none;
+    padding: 8px 18px;
     border-radius: 20px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s;
 }
 
 .lang-btn:hover {
-    background: #388e3c;
-    transform: translateY(-2px);
+    background: #219653;
 }
 
-/* Main Container */
+/* Main Layout */
 .main-container {
     max-width: 1200px;
     margin: 25px auto;
@@ -78,10 +77,9 @@ body {
     width: 100%;
 }
 
-/* Search Section */
 .search-section {
     background: white;
-    padding: 20px;
+    padding: 22px;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     margin-bottom: 25px;
@@ -95,158 +93,165 @@ body {
 .search-box input {
     flex: 1;
     padding: 14px 18px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid #e0e6ed;
     border-radius: 10px;
     font-size: 16px;
     outline: none;
-    transition: border-color 0.2s;
 }
 
 .search-box input:focus {
-    border-color: #2e7d32;
+    border-color: #27ae60;
 }
 
 .search-box button {
-    background-color: #2e7d32;
+    background-color: #27ae60;
     color: white;
     border: none;
     padding: 14px 28px;
     border-radius: 10px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s;
-}
-
-.search-box button:hover {
-    background-color: #1b5e20;
 }
 
 .search-hint {
     margin-top: 10px;
     font-size: 13px;
-    color: #718096;
+    color: #7f8c8d;
 }
 
-/* Alert */
 .alert-card {
-    background: #fff5f5;
-    border-left: 4px solid #e53e3e;
-    color: #c53030;
-    padding: 12px 18px;
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    color: #856404;
+    padding: 14px 18px;
     border-radius: 8px;
     margin-bottom: 20px;
     font-weight: 600;
-}
-
-/* Dashboard Grid */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-
-@media (max-width: 900px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .card {
     background: white;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
 .card-header {
     padding: 16px 20px;
     background: #f8fafc;
     border-bottom: 1px solid #edf2f7;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.card-header h3 {
-    font-size: 17px;
-    color: #1a202c;
-}
-
-.badge-count {
-    background: #e6f4ea;
-    color: #1e8e3e;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
 }
 
 .card-body {
     padding: 20px;
-    flex: 1;
 }
 
 #map {
-    height: 420px;
+    height: 380px;
     width: 100%;
     border-radius: 12px;
 }
 
-/* Records Card */
-.records-list {
+/* Tabs UI */
+.tab-header {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-height: 420px;
-    overflow-y: auto;
+    background: #edf2f7;
+    border-bottom: 2px solid #e2e8f0;
 }
 
-.record-item {
+.tab-btn {
+    flex: 1;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #1e4d38;
+    border-bottom: 3px solid #27ae60;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Records Grid & Cards */
+.records-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.data-card {
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 15px;
-    background: #fafafa;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 18px;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    transition: transform 0.2s;
 }
 
-.record-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    background: white;
+.data-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-.record-header {
+.card-top {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e2e8f0;
 }
 
-.record-id {
+.rec-id {
     font-weight: 700;
-    color: #2e7d32;
+    color: #27ae60;
 }
 
-.risk-badge {
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 11px;
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 700;
 }
 
-.risk-low { background: #def7ec; color: #03543f; }
-.risk-med { background: #fef3c7; color: #92400e; }
-.risk-high { background: #fde8e8; color: #9b1c1c; }
+.badge-success { background: #d4edda; color: #155724; }
+.badge-warning { background: #fff3cd; color: #856404; }
+.badge-danger { background: #f8d7da; color: #721c24; }
 
-.record-details {
+.detail-line {
     font-size: 14px;
-    line-height: 1.6;
+    margin-bottom: 6px;
     color: #4a5568;
 }
 
-/* Footer */
+.detail-line strong {
+    color: #2d3748;
+}
+
+.security-box {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    background: #f7fafc;
+    border: 1px solid #edf2f7;
+}
+
 .app-footer {
     text-align: center;
     padding: 20px;
