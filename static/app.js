@@ -1,22 +1,12 @@
-let map;
-let markers = [];
-
-function initMap() {
-    if (!map) {
-        map = L.map('map').setView([23.8103, 90.4125], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-    }
-}
-
 function performSearch() {
     const query = document.getElementById('searchInput').value.trim();
     const alertBox = document.getElementById('alertBox');
+    const resultsContainer = document.getElementById('resultsContainer');
     
     if (!query) {
-        alertBox.innerText = "⚠️ অনুগ্রহ করে দাগ নম্বর বা আইডি লিখুন।";
+        alertBox.innerText = "⚠️ অনুগ্রহ করে একটি দাগ নম্বর, খতিয়ান বা আইডি লিখুন!";
         alertBox.style.display = "block";
+        resultsContainer.innerHTML = "";
         return;
     }
 
@@ -24,118 +14,46 @@ function performSearch() {
         .then(res => res.json())
         .then(data => {
             if (!data || data.length === 0) {
-                alertBox.innerText = "⚠️ কোনো রেকর্ড পাওয়া যায়নি!";
+                alertBox.innerText = "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অন্য দাগ নম্বর বা আইডি দিয়ে চেষ্টা করুন।";
                 alertBox.style.display = "block";
-                document.getElementById('welcomePlaceholder').style.display = 'block';
-                document.getElementById('mapSection').style.display = 'none';
-                document.getElementById('recordsSection').style.display = 'none';
+                resultsContainer.innerHTML = "";
                 return;
             }
 
             alertBox.style.display = "none";
-            document.getElementById('welcomePlaceholder').style.display = 'none';
-            document.getElementById('mapSection').style.display = 'block';
-            document.getElementById('recordsSection').style.display = 'block';
+            document.getElementById('welcomePlaceholder').style.display = "none";
             
-            initMap();
-            renderRecords(data);
+            // ২০টি ডাটা প্রদর্শনের জন্য কার্ড তৈরি
+            let html = "";
+            data.forEach(r => {
+                const risk = r.buyer_risk_report || {};
+                html += `
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 12px;">
+                            <h3 style="color: #27ae60; margin: 0;">রেকর্ড আইডি: ${r.id}</h3>
+                            <span style="background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 15px; font-weight: bold; font-size: 13px;">${r.verification_status || 'যাচাইকৃত'}</span>
+                        </div>
+                        <p style="margin: 6px 0; font-size: 15px;"><b>মালিকের নাম:</b> ${r.owner_name}</p>
+                        <p style="margin: 6px 0; font-size: 15px;"><b>দাগ নম্বর:</b> ${r.dag_no} | <b>খতিয়ান নম্বর:</b> ${r.khation_no}</p>
+                        <p style="margin: 6px 0; font-size: 15px;"><b>জমির পরিমাণ:</b> ${r.land_area_decimal} শতাংশ</p>
+                        <p style="margin: 6px 0; font-size: 15px;"><b>ঠিকানা:</b> ${r.location_address || 'ঢাকা'}</p>
+                        
+                        <div style="background: #f8fafc; padding: 12px; border-radius: 8px; margin-top: 12px; border: 1px solid #e2e8f0;">
+                            <h4 style="margin: 0 0 6px 0; color: #1e293b; font-size: 14px;">🛡️ নিরাপত্তা ও জালিয়াতি রিপোর্ট:</h4>
+                            <p style="margin: 4px 0; font-size: 13px;"><b>ঝুঁকির মাত্রা:</b> ${risk.risk_level || 'Low'}</p>
+                            <p style="margin: 4px 0; font-size: 13px;"><b>ক্রিমিনাল রেকর্ড:</b> ${risk.criminal_record_found ? '🚨 বিদ্যমান' : '✅ কোনো মামলা নেই'}</p>
+                            <p style="margin: 4px 0; font-size: 13px;"><b>আদালতের বিরোধ:</b> ${risk.court_dispute ? '⚠️ আদালতে মামলা চলছে' : '✅ কোনো বিরোধ নেই'}</p>
+                            <p style="margin: 4px 0; font-size: 13px; color: #059669;"><b>সুপারিশ:</b> ${risk.buying_recommendation || 'জমির রেকর্ড সঠিক।'}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsContainer.innerHTML = html;
         })
         .catch(err => {
-            console.error("Search error:", err);
-            alertBox.innerText = "❌ সার্ভারে সংযোগ করতে সমস্যা হয়েছে।";
+            console.error(err);
+            alertBox.innerText = "❌ তথ্য লোড করতে সমস্যা হয়েছে।";
             alertBox.style.display = "block";
         });
-}
-
-function renderRecords(records) {
-    const deedsBox = document.getElementById('deedsRecordsContainer');
-    const fraudBox = document.getElementById('fraudRecordsContainer');
-    deedsBox.innerHTML = "";
-    fraudBox.innerHTML = "";
-
-    if (map && markers.length > 0) {
-        markers.forEach(m => map.removeLayer(m));
-        markers = [];
-    }
-
-    const redIcon = L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    });
-
-    let bounds = [];
-
-    records.forEach(r => {
-        if (r.coordinates && r.coordinates.lat && r.coordinates.lng) {
-            const lat = parseFloat(r.coordinates.lat);
-            const lng = parseFloat(r.coordinates.lng);
-            const marker = L.marker([lat, lng], { icon: redIcon }).addTo(map);
-            marker.bindPopup(`<b>${r.owner_name}</b><br>দাগ: ${r.dag_no}`).openPopup();
-            markers.push(marker);
-            bounds.push([lat, lng]);
-        }
-
-        deedsBox.innerHTML += `
-            <div style="border:1px solid #cbd5e1; border-radius:12px; padding:18px; background:#fff;">
-                <h4 style="color:#27ae60; margin-bottom:8px;">রেকর্ড আইডি: ${r.id}</h4>
-                <p><b>মালিক:</b> ${r.owner_name}</p>
-                <p><b>দাগ নং:</b> ${r.dag_no} | <b>খতিয়ান নং:</b> ${r.khation_no}</p>
-                <p><b>জমির পরিমাণ:</b> ${r.land_area_decimal} শতাংশ</p>
-                <p><b>ঠিকানা:</b> ${r.location_address}</p>
-            </div>
-        `;
-
-        const risk = r.buyer_risk_report || {};
-        fraudBox.innerHTML += `
-            <div style="border:1px solid #cbd5e1; border-radius:12px; padding:18px; background:#fff;">
-                <h4 style="color:#c0392b; margin-bottom:8px;">ঝুঁকি স্তর: ${risk.risk_level || 'Low'}</h4>
-                <p><b>এনআইডি ভেরিফিকেশন:</b> যাচাইকৃত</p>
-                <p><b>ক্রিমিনাল রেকর্ড:</b> ${risk.criminal_record_found ? '⚠️ বিদ্যমান' : '✅ নেই'}</p>
-                <p><b>আদালতের মামলা:</b> ${risk.court_dispute ? '⚠️ চলমান' : '✅ নেই'}</p>
-                <p><b>সুপারিশ:</b> ${risk.buying_recommendation}</p>
-            </div>
-        `;
-    });
-
-    if (bounds.length > 0) {
-        setTimeout(() => {
-            map.invalidateSize();
-            if (bounds.length === 1) {
-                map.setView(bounds[0], 15);
-            } else {
-                map.fitBounds(bounds, { padding: [30, 30] });
-            }
-        }, 150);
-    }
-}
-
-function switchTab(tab) {
-    document.getElementById('tabDeeds').style.borderBottom = tab === 'DEEDS' ? '3px solid #27ae60' : 'none';
-    document.getElementById('tabFraud').style.borderBottom = tab === 'FRAUD' ? '3px solid #27ae60' : 'none';
-    document.getElementById('viewDeeds').style.display = tab === 'DEEDS' ? 'block' : 'none';
-    document.getElementById('viewFraud').style.display = tab === 'FRAUD' ? 'block' : 'none';
-}
-
-function setRating(stars) {
-    document.getElementById('selectedRating').value = stars;
-    const starsList = document.querySelectorAll('.star');
-    starsList.forEach((s, idx) => {
-        s.style.color = idx < stars ? '#f59e0b' : '#cbd5e1';
-    });
-}
-
-function submitFeedback() {
-    const rating = document.getElementById('selectedRating').value;
-    const msg = document.getElementById('feedbackMessage').value.trim();
-    if (rating === "0" && !msg) {
-        alert("দয়া করে অন্তত রেটিং বা মতামত দিন।");
-        return;
-    }
-    alert("ধন্যবাদ! আপনার মূল্যবান মতামত ও রেটিং সফলভাবে জমা হয়েছে।");
-    document.getElementById('feedbackMessage').value = "";
-    setRating(0);
 }

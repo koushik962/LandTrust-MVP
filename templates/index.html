@@ -4,43 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LandTrust Citizen Portal | ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা</title>
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; }
         body { background-color: #f0f4f8; color: #2c3e50; min-height: 100vh; display: flex; flex-direction: column; }
-        .app-header { background: linear-gradient(135deg, #0d3b2e 0%, #1b4d3e 100%); color: white; padding: 22px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-        .header-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo-title { display: flex; align-items: center; gap: 14px; }
-        .logo-icon { font-size: 34px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 12px; }
-        .logo-title h1 { font-size: 24px; font-weight: 700; color: #ffffff; }
+        
+        .app-header { background: linear-gradient(135deg, #0d3b2e 0%, #1b4d3e 100%); color: white; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header-container { max-width: 900px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-title h1 { font-size: 22px; font-weight: 700; }
         .logo-title p { font-size: 13px; color: #a3e635; }
-        .admin-nav-btn { background: rgba(255,255,255,0.15); color: #ffffff; border: 1px solid rgba(255,255,255,0.3); padding: 8px 18px; border-radius: 20px; font-weight: 600; text-decoration: none; font-size: 14px; }
-        .admin-nav-btn:hover { background: #ffffff; color: #0d3b2e; }
-        .main-container { max-width: 1100px; margin: 30px auto; padding: 0 20px; flex: 1; width: 100%; }
-        .search-section { background: white; padding: 28px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 28px; }
-        .search-box { display: flex; gap: 12px; }
-        .search-box input { flex: 1; padding: 16px 20px; border: 2px solid #cbd5e1; border-radius: 12px; font-size: 16px; outline: none; }
+        .admin-btn { background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4); padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: 600; }
+        
+        .main-container { max-width: 900px; margin: 30px auto; padding: 0 20px; flex: 1; width: 100%; }
+        .search-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #e2e8f0; }
+        .search-box { display: flex; gap: 10px; }
+        .search-box input { flex: 1; padding: 14px 18px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 16px; outline: none; }
         .search-box input:focus { border-color: #27ae60; }
-        .search-box button { background: #27ae60; color: white; border: none; padding: 16px 30px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; }
-        .welcome-box { background: white; border-radius: 18px; padding: 50px 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 28px; }
-        .card { background: white; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 28px; overflow: hidden; }
-        .card-header { padding: 18px 24px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-weight: 700; color: #0d3b2e; }
-        .card-body { padding: 24px; }
-        #map { height: 400px; width: 100%; border-radius: 14px; }
-        .tab-header { display: flex; background: #f1f5f9; border-bottom: 2px solid #e2e8f0; }
-        .tab-btn { flex: 1; padding: 18px; background: transparent; border: none; font-size: 16px; font-weight: 700; color: #64748b; cursor: pointer; }
-        .records-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .feedback-section { margin-top: 40px; margin-bottom: 30px; }
-        .feedback-card { background: #fff; border-radius: 20px; border: 1px solid #cbd5e1; box-shadow: 0 10px 35px rgba(0,0,0,0.06); padding: 30px; }
-        .stars { font-size: 38px; cursor: pointer; color: #cbd5e1; display: inline-flex; gap: 10px; margin: 10px 0; }
-        .star { transition: 0.15s; }
-        textarea { width: 100%; padding: 15px; border: 2px solid #cbd5e1; border-radius: 12px; margin-top: 10px; outline: none; font-size: 15px; }
-        textarea:focus { border-color: #27ae60; }
-        .btn-submit { background: #0d3b2e; color: white; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 15px; font-size: 16px; }
-        .alert-card { background: #fef3c7; border-left: 5px solid #f59e0b; color: #92400e; padding: 16px; border-radius: 10px; margin-bottom: 20px; font-weight: 600; }
-        .app-footer { text-align: center; padding: 25px; color: #64748b; background: white; border-top: 1px solid #e2e8f0; margin-top: auto; }
+        .search-box button { background: #27ae60; color: white; border: none; padding: 14px 25px; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; }
+        
+        .alert-card { background: #fef3c7; border-left: 5px solid #f59e0b; color: #92400e; padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; display: none; }
+        .welcome-card { background: white; padding: 40px 20px; text-align: center; border-radius: 16px; border: 1px solid #e2e8f0; color: #64748b; }
+        
+        .footer { text-align: center; padding: 20px; background: white; color: #64748b; font-size: 13px; border-top: 1px solid #e2e8f0; margin-top: auto; }
     </style>
 </head>
 <body>
@@ -48,91 +33,36 @@
     <header class="app-header">
         <div class="header-container">
             <div class="logo-title">
-                <span class="logo-icon">🌿</span>
-                <div>
-                    <h1>ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা</h1>
-                    <p>স্মার্ট উপায়ে জমির মালিকানা সত্যতা যাচাই ও জালিয়াতি প্রতিরোধ পোর্টাল</p>
-                </div>
+                <h1>🌿 ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা</h1>
+                <p>স্মার্ট উপায়ে ২০টি ডামি রেকর্ড ও মালিকানা সত্যতা যাচাই</p>
             </div>
-            <div>
-                <a href="/admin" class="admin-nav-btn">🔐 Admin Portal</a>
-            </div>
+            <a href="/admin" class="admin-btn">🔐 অ্যাডমিন প্যানেল</a>
         </div>
     </header>
 
     <main class="main-container">
-        <section class="search-section">
+        <div class="search-card">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="দাগ নম্বর বা খতিয়ান লিখুন (যেমন: 101, 102)..." onkeypress="if(event.key === 'Enter') performSearch()">
-                <button onclick="performSearch()">🔍 তথ্য খুঁজুন</button>
-            </div>
-            <p style="margin-top: 10px; font-size: 13px; color: #64748b;">💡 টিপস: 101 বা 102 লিখে এন্টার দিন।</p>
-        </section>
-
-        <div id="alertBox" class="alert-card" style="display: none;"></div>
-
-        <!-- GIS Map -->
-        <div class="card" id="mapSection" style="display: none;">
-            <div class="card-header">📍 ভূমির সঠিক অবস্থান ও সীমানা (GIS Map)</div>
-            <div class="card-body">
-                <div id="map"></div>
+                <input type="text" id="searchInput" placeholder="দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি লিখুন (যেমন: p2, p5, 101)..." onkeypress="if(event.key === 'Enter') performSearch()">
+                <button onclick="performSearch()">🔍 খুঁজুন</button>
             </div>
         </div>
 
-        <!-- Modules Tabs -->
-        <div class="card" id="recordsSection" style="display: none;">
-            <div class="tab-header">
-                <button class="tab-btn" id="tabDeeds" onclick="switchTab('DEEDS')">📜 দলিল ও মালিকানা যাচাই</button>
-                <button class="tab-btn" id="tabFraud" onclick="switchTab('FRAUD')">🛡️ ক্রেতা সুরক্ষা ও জালিয়াতি রিপোর্ট</button>
-            </div>
-            <div class="card-body">
-                <div id="viewDeeds">
-                    <div id="deedsRecordsContainer" class="records-grid"></div>
-                </div>
-                <div id="viewFraud" style="display: none;">
-                    <div id="fraudRecordsContainer" class="records-grid"></div>
-                </div>
-            </div>
+        <div id="alertBox" class="alert-card"></div>
+
+        <div id="welcomePlaceholder" class="welcome-card">
+            <h3 style="color: #0d3b2e; margin-bottom: 8px;">যেকোনো রেকর্ড খুঁজতে উপরে আইডি লিখুন</h3>
+            <p>আপনার ২০টি ডাটার মধ্যে থেকে সঠিক তথ্যটি নিচে কার্ড আকারে দেখতে পারবেন।</p>
         </div>
 
-        <!-- Welcome Box -->
-        <div id="welcomePlaceholder" class="welcome-box">
-            <div style="font-size: 50px; margin-bottom: 10px;">🔍</div>
-            <h3 style="color: #0d3b2e; margin-bottom: 8px;">ভূমি অনুসন্ধানের জন্য উপরে দাগ নম্বর লিখুন</h3>
-            <p style="color: #64748b;">GIS ম্যাপের মাধ্যমে সঠিক অবস্থান ও জালিয়াতি সতর্কতা দেখতে যেকোনো দাগ নম্বর দিয়ে অনুসন্ধান করুন।</p>
-        </div>
-
-        <!-- Rating & Feedback Section -->
-        <section class="feedback-section">
-            <div class="feedback-card">
-                <h3 style="color: #0d3b2e; margin-bottom: 15px;">💬 আপনার মূল্যবান মতামত ও রেটিং প্রদান করুন</h3>
-                <div style="text-align: center; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                    <p style="font-weight: 600; color: #1e293b;">আমাদের পোর্টাল আপনার কাছে কেমন লেগেছে?</p>
-                    <div class="stars" id="starRating">
-                        <span class="star" onclick="setRating(1)">★</span>
-                        <span class="star" onclick="setRating(2)">★</span>
-                        <span class="star" onclick="setRating(3)">★</span>
-                        <span class="star" onclick="setRating(4)">★</span>
-                        <span class="star" onclick="setRating(5)">★</span>
-                    </div>
-                    <input type="hidden" id="selectedRating" value="0">
-                </div>
-
-                <div style="margin-top: 20px;">
-                    <p style="font-weight: 600; color: #1e293b;">পরামর্শ বা মতামত লিখুন:</p>
-                    <textarea id="feedbackMessage" rows="3" placeholder="আপনার সুচিন্তিত মতামত এখানে লিখুন..."></textarea>
-                    <button class="btn-submit" onclick="submitFeedback()">✉️ মতামত ও রেটিং জমা দিন</button>
-                </div>
-            </div>
-        </section>
+        <!-- সার্চ রেজাল্ট এই বক্সের মধ্যে যুক্ত হবে -->
+        <div id="resultsContainer"></div>
     </main>
 
-    <footer class="app-footer">
-        <p>© ২০২৬ LandTrust Ecosystem | নিরাপদ ভূমি লেনদেন সেবা</p>
+    <footer class="footer">
+        <p>© ২০২৬ LandTrust Ecosystem | ডিজিটাল ভূমি তথ্য পোর্টাল</p>
     </footer>
 
-    <!-- Leaflet JS & App JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}?v=100"></script>
+    <script src="{{ url_for('static', filename='app.js') }}?v=final"></script>
 </body>
 </html>
