@@ -116,8 +116,8 @@
         <p id="footerText">© ২০২৬ LandTrust Ecosystem | নিরাপদ ভূমি লেনদেন সেবা</p>
     </footer>
 
-    <!-- Leaflet JS & App JS -->
+    <!-- Leaflet JS & App JS (with cache-busting parameter) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="{{ url_for('static', filename='app.js') }}?v=2"></script>
 </body>
 </html>
