@@ -30,34 +30,28 @@ Anyone can easily test and verify the live application by following these simple
 ## 📝 How to Run Locally
 To run this project on your local machine, follow these steps:
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/koushik962/LandTrust-MVP.git](https://github.com/koushik962/LandTrust-MVP.git)
-Navigate into the directory:
+1. Clone the repository:
+   `git clone [https://github.com/koushik962/LandTrust-MVP.git](https://github.com/koushik962/LandTrust-MVP.git)`
 
-Bash
-cd LandTrust-MVP
-Install dependencies:
+2. Navigate into the directory:
+   `cd LandTrust-MVP`
 
-Bash
-pip install flask
-Run the application:
+3. Install dependencies:
+   `pip install flask`
 
-Bash
-python app.py
-Open your browser and go to: http://127.0.0.1:5000
+4. Run the application:
+   `python app.py`
 
-📊 Data Use & Compliance
-As per hackathon guidelines, this project strictly utilizes dummy/sample data (20 verified master records from Dag 101 to 120).
+5. Open your browser and go to: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-No actual, sensitive, or live citizen NID data has been scraped or misused.
+## 📊 Data Use & Compliance
+- As per hackathon guidelines, this project strictly utilizes dummy/sample data (20 verified master records from Dag 101 to 120).
+- No actual, sensitive, or live citizen NID data has been scraped or misused.
 
-🤖 AI Tools Usage
-ChatGPT / Gemini was utilized for architectural guidance, debugging, and UI refinement.
+## 🤖 AI Tools Usage
+- ChatGPT / Gemini was utilized for architectural guidance, debugging, and UI refinement.
 
-👥 Team & Mentors
-Team Name: Team Bug Busters
-
-Team Members: Koushik Deb (Lead) & Prionti Biswas
-
-Mentors: Mohammed Sami Khan & Fayaz Rayat
+## 👥 Team & Mentors
+- **Team Name:** Team Bug Busters
+- **Team Members:** Koushik Deb (Lead) & Prionti Biswas
+- **Mentors:** Mohammed Sami Khan & Fayaz Rayat
