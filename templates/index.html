@@ -22,9 +22,12 @@
                     <p id="appSubtitle">স্মার্ট উপায়ে জমির মালিকানা সত্যতা যাচাই ও জালিয়াতি প্রতিরোধ পোর্টাল</p>
                 </div>
             </div>
-            <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">
-                🌐 <span id="langBtnText">English</span>
-            </button>
+            <div class="header-actions">
+                <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">
+                    🌐 <span id="langBtnText">English</span>
+                </button>
+                <a href="/admin" class="admin-nav-btn">🔐 Admin Portal</a>
+            </div>
         </div>
     </header>
 
@@ -116,8 +119,8 @@
         <p id="footerText">© ২০২৬ LandTrust Ecosystem | নিরাপদ ভূমি লেনদেন সেবা</p>
     </footer>
 
-    <!-- Leaflet JS & App JS (with cache-busting parameter) -->
+    <!-- Leaflet JS & App JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}?v=2"></script>
+    <script src="{{ url_for('static', filename='app.js') }}?v=3"></script>
 </body>
 </html>
