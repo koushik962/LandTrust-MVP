@@ -5,7 +5,6 @@ import json
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = 'landtrust_super_secret_admin_key'
 
-# Admin Credentials
 ADMIN_USER = "admin"
 ADMIN_PASS = "landtrust2026"
 
@@ -33,7 +32,6 @@ def admin():
     if request.method == 'POST':
         action = request.form.get('action')
         
-        # Login Handler
         if action == 'login':
             username = request.form.get('username')
             password = request.form.get('password')
@@ -43,7 +41,6 @@ def admin():
             else:
                 message = "❌ ভুল ইউজারনেম বা পাসওয়ার্ড!"
                 
-        # Add Land Record Handler
         elif action == 'add_land' and session.get('admin_logged_in'):
             records = load_records()
             new_record = {
