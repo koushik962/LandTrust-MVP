@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=10">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; }
         body { background-color: #f0f4f8; color: #2c3e50; min-height: 100vh; display: flex; flex-direction: column; }
@@ -74,15 +73,26 @@
         .security-box { margin-top: 14px; padding: 14px; border-radius: 10px; font-size: 13px; background: #f8fafc; border: 1px solid #e2e8f0; }
         .masked-text { background: #e2e8f0; padding: 2px 8px; border-radius: 4px; letter-spacing: 2px; font-family: monospace; font-weight: 600; }
 
-        /* Rating & Feedback Box */
-        .feedback-body { display: flex; flex-direction: column; gap: 20px; }
-        .rating-box { display: flex; flex-direction: column; gap: 8px; }
-        .stars { display: flex; gap: 10px; font-size: 32px; cursor: pointer; color: #cbd5e1; }
-        .star.active { color: #f59e0b; }
-        .suggestion-box textarea { width: 100%; margin-top: 8px; padding: 14px; border: 2px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 14px; transition: all 0.2s; }
-        .suggestion-box textarea:focus { border-color: #27ae60; box-shadow: 0 0 0 3px rgba(39,174,96,0.15); }
-        .btn-submit { margin-top: 12px; background: #0d3b2e; color: white; border: none; padding: 12px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-        .btn-submit:hover { background: #1b4d3e; transform: translateY(-1px); }
+        /* Rating & Feedback Box (Gorgeous Modern UI) */
+        .feedback-section { margin-top: 40px; margin-bottom: 30px; }
+        .feedback-card { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #cbd5e1; border-radius: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.06); overflow: hidden; }
+        .feedback-header { background: #0d3b2e; color: white; padding: 20px 25px; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .feedback-body { padding: 30px; display: flex; flex-direction: column; gap: 24px; }
+        
+        .rating-container { background: #ffffff; padding: 20px; border-radius: 14px; border: 1px solid #e2e8f0; text-align: center; }
+        .rating-container p { font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 12px; }
+        .stars { display: inline-flex; gap: 12px; font-size: 36px; cursor: pointer; color: #cbd5e1; transition: 0.2s; }
+        .star { transition: transform 0.15s ease, color 0.15s ease; }
+        .star:hover { transform: scale(1.15); }
+        .star.active { color: #f59e0b; text-shadow: 0 2px 8px rgba(245,158,11,0.4); }
+
+        .suggestion-container { background: #ffffff; padding: 20px; border-radius: 14px; border: 1px solid #e2e8f0; }
+        .suggestion-container p { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 10px; }
+        .suggestion-container textarea { width: 100%; padding: 15px; border: 2px solid #cbd5e1; border-radius: 12px; outline: none; font-size: 15px; transition: all 0.2s; resize: vertical; min-height: 100px; }
+        .suggestion-container textarea:focus { border-color: #27ae60; box-shadow: 0 0 0 4px rgba(39,174,96,0.15); }
+        
+        .btn-submit { background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%); color: white; border: none; padding: 15px 32px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(39,174,96,0.3); display: block; width: 100%; margin-top: 10px; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,0.4); }
 
         .alert-card { background: #fef3c7; border-left: 5px solid #f59e0b; color: #92400e; padding: 16px 20px; border-radius: 10px; margin-bottom: 24px; font-weight: 600; }
         .app-footer { text-align: center; padding: 25px; color: #64748b; font-size: 13px; margin-top: auto; border-top: 1px solid #e2e8f0; background: white; }
@@ -116,5 +126,89 @@
                 <input type="text" id="searchInput" placeholder="শুধু দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি লিখুন (যেমন: 101, 102)...">
                 <button onclick="performSearch()" id="searchBtn">🔍 তথ্য খুঁজুন</button>
             </div>
-            <p class="search-hint" id="searchHint">💡 টিপস: অনুসন্ধানের জন্য যেকোনো একটি দাগ নম্বর বা খতিয়ান
-                
+            <p class="search-hint" id="searchHint">💡 টিপস: অনুসন্ধানের জন্য যেকোনো একটি দাগ নম্বর বা খতিয়ান দিয়ে প্রবেশ করুন।</p>
+        </section>
+
+        <div id="alertBox" class="alert-card" style="display: none;"></div>
+
+        <!-- GIS Map Section (Shown after search) -->
+        <div class="card map-card" id="mapSection" style="display: none;">
+            <div class="card-header">
+                <h3 id="mapCardTitle">📍 ভূমির সঠিক অবস্থান ও সীমানা (GIS Map)</h3>
+            </div>
+            <div class="card-body">
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <!-- Modules Tabs Section (Shown after search) -->
+        <div class="card module-card" id="recordsSection" style="display: none;">
+            <div class="tab-header">
+                <button class="tab-btn active" id="tabDeeds" onclick="switchTab('DEEDS')">
+                    📜 দলিল ও মালিকানা সত্যতা যাচাই
+                </button>
+                <button class="tab-btn" id="tabFraud" onclick="switchTab('FRAUD')">
+                    🛡️ ক্রেতা সুরক্ষা ও জালিয়াতি প্রতিরোধ রিপোর্ট
+                </button>
+            </div>
+            
+            <div class="card-body">
+                <!-- Deeds & Ownership Content -->
+                <div id="viewDeeds" class="tab-content active">
+                    <div id="deedsRecordsContainer" class="records-grid"></div>
+                </div>
+
+                <!-- Anti-Fraud Risk Content -->
+                <div id="viewFraud" class="tab-content">
+                    <div id="fraudRecordsContainer" class="records-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Placeholder (Initial state before search) -->
+        <div id="welcomePlaceholder" class="welcome-box">
+            <div class="welcome-icon">🔍</div>
+            <h3>ভূমি অনুসন্ধানের জন্য উপরে দাগ নম্বর লিখুন</h3>
+            <p>আপনার কাঙ্ক্ষিত দাগ নম্বর বা খতিয়ান দিলে GIS ম্যাপের মাধ্যমে সঠিক অবস্থান, মালিকানা ও জালিয়াতি সতর্কতা রিপোর্ট দেখানো হবে।</p>
+        </div>
+
+        <!-- Rating & Feedback Section (Enhanced UI) -->
+        <section class="feedback-section">
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <span>💬</span> <span id="feedbackTitle">আপনার মূল্যবান মতামত ও রেটিং প্রদান করুন</span>
+                </div>
+                <div class="feedback-body">
+                    <!-- 1-5 Star Rating Component -->
+                    <div class="rating-container">
+                        <p><strong>আমাদের ওয়েবসাইট ও সেবা আপনার কাছে কেমন লেগেছে?</strong></p>
+                        <div class="stars" id="starRating">
+                            <span class="star" onclick="setRating(1)">★</span>
+                            <span class="star" onclick="setRating(2)">★</span>
+                            <span class="star" onclick="setRating(3)">★</span>
+                            <span class="star" onclick="setRating(4)">★</span>
+                            <span class="star" onclick="setRating(5)">★</span>
+                        </div>
+                        <input type="hidden" id="selectedRating" value="0">
+                    </div>
+
+                    <!-- Suggestion Message Component -->
+                    <div class="suggestion-container">
+                        <p><strong>আমাদের পোর্টাল আরও উন্নত করতে আপনার কোনো পরামর্শ বা মতামত আছে কি?</strong></p>
+                        <textarea id="feedbackMessage" placeholder="আপনার সুচিন্তিত পরামর্শ বা মতামত এখানে বিস্তারিত লিখুন..."></textarea>
+                        <button class="btn-submit" onclick="submitFeedback()">✉️ মতামত ও রেটিং জমা দিন</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p id="footerText">© ২০২৬ LandTrust Ecosystem | নিরাপদ ভূমি লেনদেন সেবা</p>
+    </footer>
+
+    <!-- Leaflet JS & App JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}?v=12"></script>
+</body>
+</html>

@@ -1,462 +1,362 @@
 [
   {
-    "record_id": "LT-BD-2026-001",
-    "owner_name": "Rahim Uddin",
+    "id": "LT-BD-2026-001",
     "dag_no": "101",
-    "khatian_no": "501",
-    "land_amount": "0.45 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 24.8949,
-      "lng": 91.8687,
-      "address": "Mouza: Jalalabad, Sylhet Sadar, Sylhet"
-    },
-    "data_source": "District Registrar Office & CS Ledger",
-    "observation_date": "2026-02-10",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Clear ownership history with valid mutation records.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Korim Uddin (1940)", "SA: Rahim Uddin (1962)", "RS: Rahim Uddin (2010)"]
+    "khation_no": "501",
+    "owner_name": "মোঃ আব্দুর রহিম",
+    "nid_number": "1988269001234",
+    "land_area_decimal": "12.5",
+    "location_address": "ধানমন্ডি, ঢাকা দক্ষিণ সিটি কর্পোরেশন, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7461, "lng": 90.3742 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "জমির বায়া দলিল ও খতিয়ান সঠিক পাওয়া গেছে।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-002",
-    "owner_name": "Fatema Begum",
+    "id": "LT-BD-2026-002",
     "dag_no": "102",
-    "khatian_no": "502",
-    "land_amount": "0.30 Acres",
-    "mutation_status": "Pending",
-    "location": {
-      "lat": 23.8103,
-      "lng": 90.4125,
-      "address": "Mouza: Badda, Gulshan, Dhaka"
-    },
-    "data_source": "AC Land Office & RS Ledger",
-    "observation_date": "2026-03-01",
-    "verification_status": "Under Review",
-    "inconsistencies": ["RS vs Mutation name spelling mismatch"],
-    "risk_report": {
-      "score": "Medium Risk",
-      "summary": "Mutation is still pending due to name spelling inconsistency.",
-      "conflict_detected": true
-    },
-    "history": ["CS: Abdul Latif (1940)", "SA: Abdul Latif (1965)", "RS: Fatema Begum (2012)"]
+    "khation_no": "502",
+    "owner_name": "করিম উদ্দিন",
+    "nid_number": "1990269005678",
+    "land_area_decimal": "8.0",
+    "location_address": "গুলশান, ঢাকা উত্তর সিটি কর্পোরেশন, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7925, "lng": 90.4078 },
+    "buyer_risk_report": {
+      "risk_level": "Medium",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": true,
+      "buying_recommendation": "আদালতে বিরোধ চলমান, ক্রয়ের পূর্বে আইনগত পরামর্শ নিন।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-003",
-    "owner_name": "Kabal Hossain",
+    "id": "LT-BD-2026-003",
     "dag_no": "103",
-    "khatian_no": "503",
-    "land_amount": "1.20 Acres",
-    "mutation_status": "Rejected",
-    "location": {
-      "lat": 22.3569,
-      "lng": 91.7832,
-      "address": "Mouza: Pahartali, Chittagong"
-    },
-    "data_source": "Land Reforms Board & Local Land Office",
-    "observation_date": "2026-01-15",
-    "verification_status": "Disputed",
-    "inconsistencies": ["Multiple claimants found in RS record", "Apotroho/Encroachment flag"],
-    "risk_report": {
-      "score": "High Risk",
-      "summary": "High risk of ownership conflict! Dual claims registered.",
-      "conflict_detected": true
-    },
-    "history": ["CS: Sultan Ahmed (1938)", "SA: Kashem Ali (1960)", "RS: Disputed (2015)"]
+    "khation_no": "503",
+    "owner_name": "ফাতেমা বেগম",
+    "nid_number": "1992269009876",
+    "land_area_decimal": "15.0",
+    "location_address": "উত্তরা, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.8759, "lng": 90.3795 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "সম্পূর্ণ নিরাপদ ও বিতর্কহীন জমি।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-004",
-    "owner_name": "Anisur Rahman",
+    "id": "LT-BD-2026-004",
     "dag_no": "104",
-    "khatian_no": "504",
-    "land_amount": "0.75 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 24.3636,
-      "lng": 88.6241,
-      "address": "Mouza: Boalia, Rajshahi"
-    },
-    "data_source": "e-Mutation Portal & CS Record",
-    "observation_date": "2026-04-05",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Fully verified and legal mutation completed.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Habibur Rahman (1942)", "RS: Anisur Rahman (2008)"]
+    "khation_no": "504",
+    "owner_name": "নজরুল ইসলাম",
+    "nid_number": "1985269001122",
+    "land_area_decimal": "10.2",
+    "location_address": "মিরপুর, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.8041, "lng": 90.3653 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "রেকর্ড সঠিক আছে।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-005",
-    "owner_name": "Nusrat Jahan",
+    "id": "LT-BD-2026-005",
     "dag_no": "105",
-    "khatian_no": "505",
-    "land_amount": "0.15 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 22.8456,
-      "lng": 89.5403,
-      "address": "Mouza: Sonadanga, Khulna"
-    },
-    "data_source": "Khulna Collectorate Office",
-    "observation_date": "2026-02-20",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Clean record with no legal encumbrances.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Jahangir Alam (1945)", "RS: Nusrat Jahan (2018)"]
+    "khation_no": "505",
+    "owner_name": "আব্দুল জব্বার",
+    "nid_number": "1978269003344",
+    "land_area_decimal": "20.5",
+    "location_address": "মতিঝিল, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7331, "lng": 90.4172 },
+    "buyer_risk_report": {
+      "risk_level": "High",
+      "nid_verified": true,
+      "criminal_record_found": true,
+      "court_dispute": true,
+      "buying_recommendation": "উচ্চ ঝুঁকি পূর্ণ! ক্রয়ে বিরত থাকুন।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-006",
-    "owner_name": "Tariqul Islam",
+    "id": "LT-BD-2026-006",
     "dag_no": "106",
-    "khatian_no": "506",
-    "land_amount": "2.50 Acres",
-    "mutation_status": "Pending",
-    "location": {
-      "lat": 24.7471,
-      "lng": 90.4203,
-      "address": "Mouza: Keyotkhali, Mymensingh"
-    },
-    "data_source": "District Sub-Registry Office",
-    "observation_date": "2026-03-12",
-    "verification_status": "Under Review",
-    "inconsistencies": ["Land area mismatch between Deed and Khatian"],
-    "risk_report": {
-      "score": "Medium Risk",
-      "summary": "A 0.20 acre discrepancy detected between deed and khatian.",
-      "conflict_detected": true
-    },
-    "history": ["CS: Mokbul Hossain (1941)", "RS: Tariqul Islam (2011)"]
+    "khation_no": "506",
+    "owner_name": "সেলিনা আক্তার",
+    "nid_number": "1994269005566",
+    "land_area_decimal": "7.4",
+    "location_address": "বসুন্ধরা আ/এ, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.8151, "lng": 90.4255 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "নিরাপদ বিনিয়োগ।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-007",
-    "owner_name": "Shahana Akter",
+    "id": "LT-BD-2026-007",
     "dag_no": "107",
-    "khatian_no": "507",
-    "land_amount": "0.50 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 25.7439,
-      "lng": 89.2752,
-      "address": "Mouza: Central Road, Rangpur"
-    },
-    "data_source": "e-Porcha Portal",
-    "observation_date": "2026-01-30",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Verified via e-Porcha database.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Joynal Abedin (1939)", "RS: Shahana Akter (2014)"]
+    "khation_no": "507",
+    "owner_name": "কামরুল হাসান",
+    "nid_number": "1982269007788",
+    "land_area_decimal": "14.1",
+    "location_address": "মোহাম্মদপুর, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7658, "lng": 90.3587 },
+    "buyer_risk_report": {
+      "risk_level": "Medium",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": true,
+      "buying_recommendation": "সতর্কতা অবলম্বন করুন।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-008",
-    "owner_name": "Monirul Haque",
+    "id": "LT-BD-2026-008",
     "dag_no": "108",
-    "khatian_no": "508",
-    "land_amount": "1.00 Acres",
-    "mutation_status": "Rejected",
-    "location": {
-      "lat": 22.7010,
-      "lng": 90.3535,
-      "address": "Mouza: Sadar Road, Barisal"
-    },
-    "data_source": "Barisal AC Land Office",
-    "observation_date": "2026-02-01",
-    "verification_status": "Disputed",
-    "inconsistencies": ["Government Vested Property tag attached"],
-    "risk_report": {
-      "score": "High Risk",
-      "summary": "Property flagged as Vested Property (Arpitro Shompotti).",
-      "conflict_detected": true
-    },
-    "history": ["CS: Ramesh Chandra (1940)", "SA: Govt Vested (1965)", "RS: Monirul Haque (Claimed)"]
+    "khation_no": "508",
+    "owner_name": "রফিকুল ইসলাম",
+    "nid_number": "1980269009900",
+    "land_area_decimal": "9.6",
+    "location_address": "বনানী, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7936, "lng": 90.4031 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "পরিষ্কার দলিল।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-009",
-    "owner_name": "Kamrul Hassan",
+    "id": "LT-BD-2026-009",
     "dag_no": "109",
-    "khatian_no": "509",
-    "land_amount": "0.80 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 23.9999,
-      "lng": 90.4203,
-      "address": "Mouza: Board Bazar, Gazipur"
-    },
-    "data_source": "Gazipur Land Record Room",
-    "observation_date": "2026-03-22",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "All survey records (CS, SA, RS, BS) match seamlessly.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Sirajul Islam (1943)", "SA: Sirajul Islam (1968)", "BS: Kamrul Hassan (2020)"]
+    "khation_no": "509",
+    "owner_name": "নাজমুল হুদা",
+    "nid_number": "1975269001133",
+    "land_area_decimal": "18.3",
+    "location_address": "তেজগাঁও, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7645, "lng": 90.3890 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "যাচাই সম্পন্ন।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-010",
-    "owner_name": "Laila Arjumand",
+    "id": "LT-BD-2026-010",
     "dag_no": "110",
-    "khatian_no": "510",
-    "land_amount": "0.35 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 23.4607,
-      "lng": 91.1809,
-      "address": "Mouza: Kandirpar, Comilla"
-    },
-    "data_source": "Comilla Sadar Registry",
-    "observation_date": "2026-04-01",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "No conflicts found.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Delwar Hossain (1940)", "RS: Laila Arjumand (2016)"]
+    "khation_no": "510",
+    "owner_name": "শিরিন সুলতানা",
+    "nid_number": "1991269002244",
+    "land_area_decimal": "11.0",
+    "location_address": "খিলগাঁও, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7482, "lng": 90.4251 },
+    "buyer_risk_report": {
+      "risk_level": "Medium",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": true,
+      "buying_recommendation": "সাবধানতা জরুরি।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-011",
-    "owner_name": "Ziaur Rahman",
+    "id": "LT-BD-2026-011",
     "dag_no": "111",
-    "khatian_no": "511",
-    "land_amount": "0.60 Acres",
-    "mutation_status": "Pending",
-    "location": {
-      "lat": 23.7272,
-      "lng": 90.4093,
-      "address": "Mouza: Motijheel, Dhaka"
-    },
-    "data_source": "RAJUK & Land Office",
-    "observation_date": "2026-03-18",
-    "verification_status": "Under Review",
-    "inconsistencies": ["Inheritance (Warish) certificate pending verification"],
-    "risk_report": {
-      "score": "Medium Risk",
-      "summary": "Warish certificate requires local Union Parishad verification.",
-      "conflict_detected": true
-    },
-    "history": ["CS: Bazlur Rahman (1944)", "RS: Ziaur Rahman (2022)"]
+    "khation_no": "511",
+    "owner_name": "আসিফ ইকবাল",
+    "nid_number": "1989269003355",
+    "land_area_decimal": "13.2",
+    "location_address": "রামপুরা, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7548, "lng": 90.4173 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "নিরাপদ।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-012",
-    "owner_name": "Farhana Chowdhury",
+    "id": "LT-BD-2026-012",
     "dag_no": "112",
-    "khatian_no": "512",
-    "land_amount": "0.40 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 24.8917,
-      "lng": 91.8700,
-      "address": "Mouza: Zindabazar, Sylhet"
-    },
-    "data_source": "Sylhet Municipal Records",
-    "observation_date": "2026-02-28",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Verified buyer-friendly record.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Mahmud Chowdhury (1938)", "RS: Farhana Chowdhury (2010)"]
+    "khation_no": "512",
+    "owner_name": "তানিয়া রহমান",
+    "nid_number": "1993269004466",
+    "land_area_decimal": "6.8",
+    "location_address": "লালমাটিয়া, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7515, "lng": 90.3698 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "অনুমোদিত।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-013",
-    "owner_name": "Babul Miah",
+    "id": "LT-BD-2026-013",
     "dag_no": "113",
-    "khatian_no": "513",
-    "land_amount": "3.10 Acres",
-    "mutation_status": "Rejected",
-    "location": {
-      "lat": 23.9888,
-      "lng": 91.1123,
-      "address": "Mouza: Brahmanbaria Sadar"
-    },
-    "data_source": "District Civil Court Records",
-    "observation_date": "2026-01-10",
-    "verification_status": "Disputed",
-    "inconsistencies": ["Active civil litigation (Injunction Order)"],
-    "risk_report": {
-      "score": "High Risk",
-      "summary": "Court injunction active! Buying/selling strictly prohibited.",
-      "conflict_detected": true
-    },
-    "history": ["CS: Babul Miah (1950)", "Litigation Ongoing (2024)"]
+    "khation_no": "513",
+    "owner_name": "মঞ্জুর আলম",
+    "nid_number": "1984269005577",
+    "land_area_decimal": "22.4",
+    "location_address": "যাত্রাবাড়ী, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7158, "lng": 90.4323 },
+    "buyer_risk_report": {
+      "risk_level": "High",
+      "nid_verified": true,
+      "criminal_record_found": true,
+      "court_dispute": false,
+      "buying_recommendation": "ঝুঁকিপূর্ণ।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-014",
-    "owner_name": "Rokon Uddin",
+    "id": "LT-BD-2026-014",
     "dag_no": "114",
-    "khatian_no": "514",
-    "land_amount": "0.90 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 24.1872,
-      "lng": 90.1102,
-      "address": "Mouza: Tangail Sadar"
-    },
-    "data_source": "e-Mutation Database",
-    "observation_date": "2026-03-05",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Clear land title.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Afsar Ali (1942)", "RS: Rokon Uddin (2015)"]
+    "khation_no": "514",
+    "owner_name": "নাসরিন সুলতানা",
+    "nid_number": "1987269006688",
+    "land_area_decimal": "10.0",
+    "location_address": "শ্যামলী, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7735, "lng": 90.3682 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "সঠিক রেকর্ড।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-015",
-    "owner_name": "Sabina Yasmin",
+    "id": "LT-BD-2026-015",
     "dag_no": "115",
-    "khatian_no": "515",
-    "land_amount": "0.25 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 23.6238,
-      "lng": 90.4990,
-      "address": "Mouza: Narayanganj Sadar"
-    },
-    "data_source": "Narayanganj Registry Office",
-    "observation_date": "2026-04-10",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "100% verified mutation and ownership.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Solaiman Khan (1945)", "BS: Sabina Yasmin (2021)"]
+    "khation_no": "515",
+    "owner_name": "জহির রায়হান",
+    "nid_number": "1983269007799",
+    "land_area_decimal": "16.5",
+    "location_address": "পল্টন, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7314, "lng": 90.4111 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "নিরাপদ চুক্তি।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-016",
-    "owner_name": "Imtiaz Ahmed",
+    "id": "LT-BD-2026-016",
     "dag_no": "116",
-    "khatian_no": "516",
-    "land_amount": "1.50 Acres",
-    "mutation_status": "Pending",
-    "location": {
-      "lat": 25.6279,
-      "lng": 88.6332,
-      "address": "Mouza: Dinajpur Sadar"
-    },
-    "data_source": "Dinajpur Collectorate",
-    "observation_date": "2026-02-14",
-    "verification_status": "Under Review",
-    "inconsistencies": ["Tax payment overdue since 2021"],
-    "risk_report": {
-      "score": "Medium Risk",
-      "summary": "Land development tax unpaid for last 5 years.",
-      "conflict_detected": true
-    },
-    "history": ["CS: Imtiaz Ahmed (1960)"]
+    "khation_no": "516",
+    "owner_name": "শামসুন্নাহার",
+    "nid_number": "1979269008800",
+    "land_area_decimal": "8.5",
+    "location_address": "বাড্ডা, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7782, "lng": 90.4231 },
+    "buyer_risk_report": {
+      "risk_level": "Medium",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": true,
+      "buying_recommendation": "যাচাই করে কিনুন।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-017",
-    "owner_name": "Mehedi Hasan",
+    "id": "LT-BD-2026-017",
     "dag_no": "117",
-    "khatian_no": "517",
-    "land_amount": "0.65 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 23.1634,
-      "lng": 89.2182,
-      "address": "Mouza: Jessore Sadar"
-    },
-    "data_source": "e-Porcha Portal",
-    "observation_date": "2026-03-30",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Clean and conflict-free record.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Kashem Hossain (1941)", "RS: Mehedi Hasan (2017)"]
+    "khation_no": "517",
+    "owner_name": "ফরহাদ হোসেন",
+    "nid_number": "1986269009911",
+    "land_area_decimal": "19.0",
+    "location_address": "মালিবাগ, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7502, "lng": 90.4124 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "ঝুঁকিমুক্ত।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-018",
-    "owner_name": "Sultana Razia",
+    "id": "LT-BD-2026-018",
     "dag_no": "118",
-    "khatian_no": "518",
-    "land_amount": "0.20 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 23.8120,
-      "lng": 90.3654,
-      "address": "Mouza: Mirpur, Dhaka"
-    },
-    "data_source": "Dhaka Sub-Registry Office",
-    "observation_date": "2026-04-12",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "Verified residential plot.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Ali Akbar (1940)", "BS: Sultana Razia (2019)"]
+    "khation_no": "518",
+    "owner_name": "রোকেয়া বেগম",
+    "nid_number": "1977269001122",
+    "land_area_decimal": "11.7",
+    "location_address": "শান্তিনগর, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7389, "lng": 90.4121 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "অনুমোদিত।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-019",
-    "owner_name": "Asaduzzaman",
+    "id": "LT-BD-2026-019",
     "dag_no": "119",
-    "khatian_no": "519",
-    "land_amount": "4.00 Acres",
-    "mutation_status": "Rejected",
-    "location": {
-      "lat": 21.4272,
-      "lng": 92.0058,
-      "address": "Mouza: Cox's Bazar Sadar"
-    },
-    "data_source": "Forest Department & AC Land",
-    "observation_date": "2026-01-05",
-    "verification_status": "Disputed",
-    "inconsistencies": ["Overlaps with Protected Forest Land"],
-    "risk_report": {
-      "score": "High Risk",
-      "summary": "Overlap with government forest land detected!",
-      "conflict_detected": true
-    },
-    "history": ["CS: Asaduzzaman (1965)", "Forest Claim (2010)"]
+    "khation_no": "519",
+    "owner_name": "ইমদাদুল হক",
+    "nid_number": "1981269002233",
+    "land_area_decimal": "14.8",
+    "location_address": "খিলক্ষেত, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.8312, "lng": 90.4165 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "সঠিক আছে।"
+    }
   },
   {
-    "record_id": "LT-BD-2026-020",
-    "owner_name": "Habibullah Khan",
+    "id": "LT-BD-2026-020",
     "dag_no": "120",
-    "khatian_no": "520",
-    "land_amount": "0.55 Acres",
-    "mutation_status": "Mutated",
-    "location": {
-      "lat": 24.0958,
-      "lng": 90.3245,
-      "address": "Mouza: Sreepur, Gazipur"
-    },
-    "data_source": "Sreepur Land Office",
-    "observation_date": "2026-03-25",
-    "verification_status": "Verified",
-    "inconsistencies": [],
-    "risk_report": {
-      "score": "Low Risk",
-      "summary": "100% authentic land title.",
-      "conflict_detected": false
-    },
-    "history": ["CS: Habibullah Khan (1955)", "RS: Habibullah Khan (2012)"]
+    "khation_no": "520",
+    "owner_name": "সাবিনা ইয়াসমিন",
+    "nid_number": "1995269003344",
+    "land_area_decimal": "9.2",
+    "location_address": "গেণ্ডারিয়া, ঢাকা",
+    "verification_status": "যাচাইকৃত",
+    "coordinates": { "lat": 23.7172, "lng": 90.4201 },
+    "buyer_risk_report": {
+      "risk_level": "Low",
+      "nid_verified": true,
+      "criminal_record_found": false,
+      "court_dispute": false,
+      "buying_recommendation": "নিরাপদ।"
+    }
   }
 ]
