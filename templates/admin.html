@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LandTrust Admin Panel | এডমিন কন্ট্রোল প্যানেল</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        body { background-color: #f0f4f2; margin: 0; padding: 20px; }
+        .admin-card { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #1b4d3e; margin-bottom: 20px; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+        .btn { width: 100%; background: #27ae60; color: white; border: none; padding: 12px; font-weight: 700; border-radius: 6px; cursor: pointer; }
+        .btn:hover { background: #219653; }
+        .message { padding: 10px; background: #e8f5e9; color: #2e7d32; border-radius: 6px; margin-bottom: 15px; text-align: center; }
+        .logout-link { display: block; text-align: right; margin-bottom: 10px; color: #e74c3c; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-card">
+        {% if not logged_in %}
+            <h2>🔐 LandTrust Admin Login</h2>
+            {% if message %}<div class="message">{{ message }}</div>{% endif %}
+            <form method="POST">
+                <input type="hidden" name="action" value="login">
+                <div class="form-group">
+                    <label>ইউজারনেম (Username):</label>
+                    <input type="text" name="username" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>পাসওয়ার্ড (Password):</label>
+                    <input type="password" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn">লগইন করুন</button>
+            </form>
+        {% else %}
+            <a href="/admin/logout" class="logout-link">🚪 লগআউট</a>
+            <h2>➕ নতুন জমির রেকর্ড যুক্ত করুন</h2>
+            {% if message %}<div class="message">{{ message }}</div>{% endif %}
+            <form method="POST">
+                <input type="hidden" name="action" value="add_land">
+                <div class="form-group">
+                    <label>রেকর্ড আইডি (e.g. LT-BD-2026-008):</label>
+                    <input type="text" name="id" required placeholder="LT-BD-2026-008">
+                </div>
+                <div class="form-group">
+                    <label>দাগ নম্বর (Dag No):</label>
+                    <input type="text" name="dag_no" required placeholder="১০১">
+                </div>
+                <div class="form-group">
+                    <label>খতিয়ান নম্বর (Khatian No):</label>
+                    <input type="text" name="khation_no" required placeholder="৫০১">
+                </div>
+                <div class="form-group">
+                    <label>মালিকের নাম (Owner Name):</label>
+                    <input type="text" name="owner_name" required placeholder="মোঃ আব্দুর রহিম">
+                </div>
+                <div class="form-group">
+                    <label>এনআইডি নম্বর (NID Number):</label>
+                    <input type="text" name="nid_number" required placeholder="1988269001234">
+                </div>
+                <div class="form-group">
+                    <label>জমির পরিমাণ (শতাংশ):</label>
+                    <input type="text" name="land_area_decimal" required placeholder="১২.৫">
+                </div>
+                <div class="form-group">
+                    <label>ঠিকানা/অবস্থান (Location Address):</label>
+                    <input type="text" name="location_address" required placeholder="ধানমন্ডি, ঢাকা">
+                </div>
+                <div class="form-group">
+                    <label>অক্ষাংশ (Latitude - GIS):</label>
+                    <input type="text" name="lat" required placeholder="23.7461">
+                </div>
+                <div class="form-group">
+                    <label>দ্রাঘিমাংশ (Longitude - GIS):</label>
+                    <input type="text" name="lng" required placeholder="90.3742">
+                </div>
+                <div class="form-group">
+                    <label>ঝুঁকি স্তর (Risk Level):</label>
+                    <select name="risk_level">
+                        <option value="Low">Low (নিরাপদ)</option>
+                        <option value="Medium">Medium (সতর্কতা)</option>
+                        <option value="High">High (ঝুঁকিপূর্ণ)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ক্রিমিনাল/পুলিশ রেকর্ড আছে?</label>
+                    <select name="criminal_record">
+                        <option value="no">না (No Record)</option>
+                        <option value="yes">হ্যাঁ (Found)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>আদালতে মামলা ঝুলছে?</label>
+                    <select name="court_dispute">
+                        <option value="no">না (Dispute-Free)</option>
+                        <option value="yes">হ্যাঁ (Court Pending)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">💾 জমি সেভ করুন</button>
+            </form>
+        {% endif %}
+    </div>
+
+</body>
+</html>
