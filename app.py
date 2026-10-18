@@ -8,29 +8,30 @@ app.secret_key = 'landtrust_super_secret_admin_key'
 ADMIN_USER = "admin"
 ADMIN_PASS = "landtrust2026"
 
-def get_json_path():
-    # Vercel deployment path handling
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(base_dir, 'data', 'land_records.json')
-
 def load_records():
-    json_path = get_json_path()
-    try:
-        if os.path.exists(json_path):
-            with open(json_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        else:
-            print(f"File not found at: {json_path}")
-            return []
-    except Exception as e:
-        print(f"Error loading records: {e}")
-        return []
+    # Vercel environments resolution
+    possible_paths = [
+        os.path.join(app.root_path, 'data', 'land_records.json'),
+        os.path.join(os.getcwd(), 'data', 'land_records.json'),
+        'data/land_records.json'
+    ]
+    
+    for path in possible_paths:
+        if os.path.exists(path):
+            try:
+                with open(path, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except Exception as e:
+                print(f"Error reading JSON from {path}: {e}")
+                
+    print("❌ No valid land_records.json path found!")
+    return []
 
 def save_records(records):
-    json_path = get_json_path()
+    save_path = os.path.join(app.root_path, 'data', 'land_records.json')
     try:
-        os.makedirs(os.path.dirname(json_path), exist_ok=True)
-        with open(json_path, 'w', encoding='utf-8') as f:
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        with open(save_path, 'w', encoding='utf-8') as f:
             json.dump(records, f, ensure_ascii=False, indent=2)
     except Exception as e:
         print(f"Error saving records: {e}")
@@ -104,7 +105,7 @@ def search():
         khation = str(r.get('khation_no', '')).lower()
         owner = str(r.get('owner_name', '')).lower()
         
-        # Flexibly match exact or partial dag, khation, owner or ID
+        # Exact and partial matching
         if query in rec_id or query in dag or query in khation or query in owner:
             filtered.append(r)
             
@@ -112,4 +113,3 @@ def search():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
