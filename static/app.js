@@ -9,13 +9,13 @@ const translations = {
         appTitle: "ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা",
         appSubtitle: "স্মার্ট উপায়ে জমির মালিকানা সত্যতা যাচাই ও জালিয়াতি প্রতিরোধ পোর্টাল",
         langBtnText: "English",
-        searchPlaceholder: "শুধু দাগ নম্বর, খতিয়ান বা মালিকের নাম লিখুন (যেমন: 101, 102, রহিম)...",
+        searchPlaceholder: "শুধু দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি লিখুন (যেমন: 101, 102)...",
         searchBtn: "🔍 তথ্য খুঁজুন",
-        searchHint: "💡 টিপস: আপনার জমার দাগ নম্বর বা খতিয়ান নম্বর দিয়ে খুঁজলে জমির ম্যাপ ও সুরক্ষা রিপোর্ট চলে আসবে।",
+        searchHint: "💡 টিপস: অনুসন্ধানের জন্য যেকোনো একটি দাগ নম্বর বা খতিয়ান দিয়ে প্রবেশ করুন।",
         mapCardTitle: "📍 ভূমির সঠিক অবস্থান ও সীমানা (GIS Map)",
         tabDeeds: "📜 দলিল ও মালিকানা সত্যতা যাচাই",
         tabFraud: "🛡️ ক্রেতা সুরক্ষা ও জালিয়াতি প্রতিরোধ রিপোর্ট",
-        noResult: "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অন্য দাগ নম্বর বা নাম দিয়ে চেষ্টা করুন।",
+        noResult: "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অনুগ্রহ করে দাগ নম্বর বা নাম দিয়ে চেষ্টা করুন।",
         owner: "মালিকের নাম:",
         dag: "দাগ নম্বর:",
         khation: "খতিয়ান নম্বর:",
@@ -33,7 +33,7 @@ const translations = {
         appTitle: "LandTrust Digital Land Services",
         appSubtitle: "Smart Portal for Land Verification & Anti-Fraud Protection",
         langBtnText: "বাংলা",
-        searchPlaceholder: "Enter Dag No, Khatian or Owner Name (e.g. 101, 102, Rahim)...",
+        searchPlaceholder: "Enter Dag No, Khatian or ID (e.g. 101, 102)...",
         searchBtn: "🔍 Search Record",
         searchHint: "💡 Tip: Search by Dag number to view GIS location and security report.",
         mapCardTitle: "📍 Precise Land Location & Boundary (GIS Map)",
@@ -56,15 +56,16 @@ const translations = {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-    initMap();
-    loadDefaultRecords();
+    // Initial state: No records displayed until search
 });
 
 function initMap() {
-    map = L.map('map').setView([23.8103, 90.4125], 7);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+    if (!map) {
+        map = L.map('map').setView([23.8103, 90.4125], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+    }
 }
 
 function switchTab(tab) {
@@ -93,22 +94,26 @@ function toggleLanguage() {
     renderCurrentRecords();
 }
 
-function loadDefaultRecords() {
-    fetch('/api/search')
-        .then(res => res.json())
-        .then(data => {
-            currentRecords = data;
-            renderCurrentRecords();
-        })
-        .catch(err => console.error("Data loading error:", err));
-}
-
 function performSearch() {
     const query = document.getElementById('searchInput').value.trim();
+    const alertBox = document.getElementById('alertBox');
+    
+    if (!query) {
+        alertBox.innerText = "⚠️ অনুগ্রহ করে একটি দাগ নম্বর বা আইডি লিখে অনুসন্ধান করুন।";
+        alertBox.style.display = "block";
+        return;
+    }
+
     fetch(`/api/search?q=${encodeURIComponent(query)}`)
         .then(res => res.json())
         .then(data => {
             currentRecords = data;
+            
+            document.getElementById('welcomePlaceholder').style.display = 'none';
+            document.getElementById('mapSection').style.display = 'block';
+            document.getElementById('recordsSection').style.display = 'block';
+            
+            initMap();
             renderCurrentRecords();
         });
 }
@@ -119,32 +124,46 @@ function renderCurrentRecords() {
     const fraudBox = document.getElementById('fraudRecordsContainer');
     const alertBox = document.getElementById('alertBox');
 
-    markers.forEach(m => map.removeLayer(m));
-    markers = [];
+    if (map && markers) {
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+    }
+
     deedsBox.innerHTML = "";
     fraudBox.innerHTML = "";
 
     if (!currentRecords || currentRecords.length === 0) {
         alertBox.innerText = t.noResult;
         alertBox.style.display = "block";
+        document.getElementById('mapSection').style.display = 'none';
+        document.getElementById('recordsSection').style.display = 'none';
         return;
     }
     alertBox.style.display = "none";
+
+    // Red Location Pin Icon
+    const redIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
 
     let bounds = [];
 
     currentRecords.forEach(r => {
         const address = r.location_address || "ধানমন্ডি, ঢাকা দক্ষিণ সিটি কর্পোরেশন, ঢাকা";
 
-        // Map marker with precise location
         if (r.coordinates && r.coordinates.lat && r.coordinates.lng) {
-            const marker = L.marker([r.coordinates.lat, r.coordinates.lng]).addTo(map);
-            marker.bindPopup(`<b>${r.owner_name}</b><br>📍 ${address}<br>${t.dag} ${r.dag_no}`);
+            const marker = L.marker([r.coordinates.lat, r.coordinates.lng], { icon: redIcon }).addTo(map);
+            marker.bindPopup(`<b>${r.owner_name}</b><br>📍 ${address}<br>${t.dag} ${r.dag_no}`).openPopup();
             markers.push(marker);
             bounds.push([r.coordinates.lat, r.coordinates.lng]);
         }
 
-        // Deed & Ownership Card
+        // Deed Card
         const cardDeeds = document.createElement('div');
         cardDeeds.className = 'data-card';
         cardDeeds.innerHTML = `
@@ -164,7 +183,7 @@ function renderCurrentRecords() {
         `;
         deedsBox.appendChild(cardDeeds);
 
-        // Pre-Purchase Anti-Fraud Card
+        // Anti-Fraud Card
         const cardFraud = document.createElement('div');
         cardFraud.className = 'data-card';
 
@@ -172,7 +191,6 @@ function renderCurrentRecords() {
         const riskLevel = risk.risk_level || 'Low';
         const badgeClass = riskLevel === 'High' ? 'badge-danger' : (riskLevel === 'Medium' ? 'badge-warning' : 'badge-success');
 
-        // Masking sensitive NID
         const maskedNid = r.nid_number ? r.nid_number.replace(/(\d{4})\d{4}(\d{2})/, "$1-****-$2") : "1988-****-9421";
 
         cardFraud.innerHTML = `
@@ -197,6 +215,34 @@ function renderCurrentRecords() {
     });
 
     if (bounds.length > 0) {
-        map.fitBounds(bounds, { padding: [40, 40] });
+        setTimeout(() => {
+            map.invalidateSize();
+            map.fitBounds(bounds, { padding: [40, 40] });
+        }, 200);
     }
+}
+
+function setRating(stars) {
+    document.getElementById('selectedRating').value = stars;
+    const starElements = document.querySelectorAll('.star');
+    starElements.forEach((s, index) => {
+        if (index < stars) {
+            s.classList.add('active');
+        } else {
+            s.classList.remove('active');
+        }
+    });
+}
+
+function submitFeedback() {
+    const rating = document.getElementById('selectedRating').value;
+    const msg = document.getElementById('feedbackMessage').value.trim();
+
+    if (rating === "0" && !msg) {
+        alert("অনুগ্রহ করে রেটিং অথবা একটি ছোট মতামত প্রদান করুন।");
+        return;
+    }
+
+    alert(`ধন্যবাদ! আপনার ${rating > 0 ? rating + ' Star রেটিং এবং ' : ''}মতামতটি সফলভাবে জমা হয়েছে।`);
+    document.getElementById('feedbackMessage').value = "";
 }
