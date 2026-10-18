@@ -9,17 +9,13 @@ ADMIN_USER = "admin"
 ADMIN_PASS = "landtrust2026"
 
 def load_records():
-    # Base directory level mapping for Vercel
     base_dir = os.path.dirname(os.path.abspath(__file__))
     json_path = os.path.join(base_dir, 'data', 'land_records.json')
-    
     try:
         if os.path.exists(json_path):
             with open(json_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        else:
-            print(f"File not found at {json_path}")
-            return []
+        return []
     except Exception as e:
         print(f"Error loading records: {e}")
         return []

@@ -55,10 +55,6 @@ const translations = {
     }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Initial state: Search functionality setup
-});
-
 function initMap() {
     if (!map) {
         map = L.map('map').setView([23.8103, 90.4125], 7);
@@ -120,7 +116,7 @@ function performSearch() {
 
             alertBox.style.display = "none";
             document.getElementById('welcomePlaceholder').style.display = 'none';
-                document.getElementById('mapSection').style.display = 'block';
+            document.getElementById('mapSection').style.display = 'block';
             document.getElementById('recordsSection').style.display = 'block';
             
             initMap();
@@ -148,7 +144,6 @@ function renderCurrentRecords() {
 
     if (!currentRecords || currentRecords.length === 0) return;
 
-    // Red Location Pin Icon
     const redIcon = L.icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -170,7 +165,6 @@ function renderCurrentRecords() {
             bounds.push([r.coordinates.lat, r.coordinates.lng]);
         }
 
-        // Deed Card
         const cardDeeds = document.createElement('div');
         cardDeeds.className = 'data-card';
         cardDeeds.innerHTML = `
@@ -190,14 +184,12 @@ function renderCurrentRecords() {
         `;
         deedsBox.appendChild(cardDeeds);
 
-        // Anti-Fraud Card
         const cardFraud = document.createElement('div');
         cardFraud.className = 'data-card';
 
         const risk = r.buyer_risk_report || {};
         const riskLevel = risk.risk_level || 'Low';
         const badgeClass = riskLevel === 'High' ? 'badge-danger' : (riskLevel === 'Medium' ? 'badge-warning' : 'badge-success');
-
         const maskedNid = r.nid_number ? r.nid_number.replace(/(\d{4})\d{4}(\d{2})/, "$1-****-$2") : "1988-****-9421";
 
         cardFraud.innerHTML = `
