@@ -15,7 +15,7 @@ const translations = {
         mapCardTitle: "📍 ভূমির সঠিক অবস্থান ও সীমানা (GIS Map)",
         tabDeeds: "📜 দলিল ও মালিকানা সত্যতা যাচাই",
         tabFraud: "🛡️ ক্রেতা সুরক্ষা ও জালিয়াতি প্রতিরোধ রিপোর্ট",
-        noResult: "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অনুগ্রহ করে দাগ নম্বর বা নাম দিয়ে চেষ্টা করুন।",
+        noResult: "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অনুগ্রহ করে দাগ নম্বর (যেমন: 101, 102) দিয়ে চেষ্টা করুন।",
         owner: "মালিকের নাম:",
         dag: "দাগ নম্বর:",
         khation: "খতিয়ান নম্বর:",
@@ -39,7 +39,7 @@ const translations = {
         mapCardTitle: "📍 Precise Land Location & Boundary (GIS Map)",
         tabDeeds: "📜 Deed & Ownership Verification",
         tabFraud: "🛡️ Pre-Purchase Risk & Fraud Shield",
-        noResult: "⚠️ No record found! Please try another Dag number.",
+        noResult: "⚠️ No record found! Please try Dag number like 101, 102.",
         owner: "Owner Name:",
         dag: "Dag No:",
         khation: "Khatian No:",
@@ -56,7 +56,7 @@ const translations = {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Initial state: No records displayed until search
+    // Initial state: Search functionality setup
 });
 
 function initMap() {
@@ -109,12 +109,27 @@ function performSearch() {
         .then(data => {
             currentRecords = data;
             
+            if (!currentRecords || currentRecords.length === 0) {
+                alertBox.innerText = translations[currentLang].noResult;
+                alertBox.style.display = "block";
+                document.getElementById('welcomePlaceholder').style.display = 'block';
+                document.getElementById('mapSection').style.display = 'none';
+                document.getElementById('recordsSection').style.display = 'none';
+                return;
+            }
+
+            alertBox.style.display = "none";
             document.getElementById('welcomePlaceholder').style.display = 'none';
-            document.getElementById('mapSection').style.display = 'block';
+                document.getElementById('mapSection').style.display = 'block';
             document.getElementById('recordsSection').style.display = 'block';
             
             initMap();
             renderCurrentRecords();
+        })
+        .catch(err => {
+            console.error("Search error:", err);
+            alertBox.innerText = "❌ তথ্য লোড করতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।";
+            alertBox.style.display = "block";
         });
 }
 
@@ -122,7 +137,6 @@ function renderCurrentRecords() {
     const t = translations[currentLang];
     const deedsBox = document.getElementById('deedsRecordsContainer');
     const fraudBox = document.getElementById('fraudRecordsContainer');
-    const alertBox = document.getElementById('alertBox');
 
     if (map && markers) {
         markers.forEach(m => map.removeLayer(m));
@@ -132,14 +146,7 @@ function renderCurrentRecords() {
     deedsBox.innerHTML = "";
     fraudBox.innerHTML = "";
 
-    if (!currentRecords || currentRecords.length === 0) {
-        alertBox.innerText = t.noResult;
-        alertBox.style.display = "block";
-        document.getElementById('mapSection').style.display = 'none';
-        document.getElementById('recordsSection').style.display = 'none';
-        return;
-    }
-    alertBox.style.display = "none";
+    if (!currentRecords || currentRecords.length === 0) return;
 
     // Red Location Pin Icon
     const redIcon = L.icon({
@@ -203,7 +210,7 @@ function renderCurrentRecords() {
                 <strong>${t.location}</strong> ${address}
             </div>
             <div class="detail-line"><strong>${t.nid}</strong> <span class="masked-text">${maskedNid}</span> (এনআইডি যাচাইকৃত)</div>
-            <div class="detail-line"><strong>${t.criminal}</strong> ${risk.criminal_record_found ? '🚨 মামলা বা ক্রিমিনাল রেকাড বিদ্যমান' : '✅ কোনো ক্রিমিনাল রেকর্ড পাওয়া যায়নি'}</div>
+            <div class="detail-line"><strong>${t.criminal}</strong> ${risk.criminal_record_found ? '🚨 মামলা বা ক্রিমিনাল রেকর্ড বিদ্যমান' : '✅ কোনো ক্রিমিনাল রেকর্ড পাওয়া যায়নি'}</div>
             <div class="detail-line"><strong>${t.court}</strong> ${risk.court_dispute ? '⚠️ আদালতে মামলা চলমান' : '✅ কোনো বিরোধ নেই (Dispute-Free)'}</div>
             <div class="security-box">
                 🔒 <strong>${t.maskedNotice}:</strong> কিছু তথ্য গোপন রাখা হয়েছে।
@@ -217,7 +224,11 @@ function renderCurrentRecords() {
     if (bounds.length > 0) {
         setTimeout(() => {
             map.invalidateSize();
-            map.fitBounds(bounds, { padding: [40, 40] });
+            if (bounds.length === 1) {
+                map.setView(bounds[0], 15);
+            } else {
+                map.fitBounds(bounds, { padding: [40, 40] });
+            }
         }, 200);
     }
 }
