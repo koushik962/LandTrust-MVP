@@ -38,16 +38,12 @@ def admin():
     message = ""
     if request.method == 'POST':
         action = request.form.get('action')
-        
         if action == 'login':
-            username = request.form.get('username')
-            password = request.form.get('password')
-            if username == ADMIN_USER and password == ADMIN_PASS:
+            if request.form.get('username') == ADMIN_USER and request.form.get('password') == ADMIN_PASS:
                 session['admin_logged_in'] = True
                 return redirect(url_for('admin'))
             else:
                 message = "❌ ভুল ইউজারনেম বা পাসওয়ার্ড!"
-                
         elif action == 'add_land' and session.get('admin_logged_in'):
             records = load_records()
             new_record = {
@@ -73,10 +69,9 @@ def admin():
             }
             records.append(new_record)
             save_records(records)
-            message = "✅ নতুন জমির তথ্য সফলভাবে যুক্ত হয়েছে!"
+            message = "✅ সফলভাবে নতুন রেকর্ড যুক্ত হয়েছে!"
 
-    logged_in = session.get('admin_logged_in', False)
-    return render_template('admin.html', logged_in=logged_in, message=message)
+    return render_template('admin.html', logged_in=session.get('admin_logged_in', False), message=message)
 
 @app.route('/admin/logout')
 def admin_logout():
@@ -87,18 +82,15 @@ def admin_logout():
 def search():
     query = request.args.get('q', '').strip().lower()
     records = load_records()
-    
     if not query:
         return jsonify([])
     
     filtered = []
     for r in records:
-        rec_id = str(r.get('id', '')).lower()
-        dag = str(r.get('dag_no', '')).lower()
-        khation = str(r.get('khation_no', '')).lower()
-        owner = str(r.get('owner_name', '')).lower()
-        
-        if query in rec_id or query in dag or query in khation or query in owner:
+        if (query in str(r.get('id', '')).lower() or 
+            query in str(r.get('dag_no', '')).lower() or 
+            query in str(r.get('khation_no', '')).lower() or 
+            query in str(r.get('owner_name', '')).lower()):
             filtered.append(r)
             
     return jsonify(filtered)
