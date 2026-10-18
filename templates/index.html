@@ -10,317 +10,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Hind Siliguri', sans-serif;
-        }
-
-        body {
-            background-color: #f3f6f9;
-            color: #2c3e50;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .app-header {
-            background: linear-gradient(135deg, #1b4d3e 0%, #0a251c 100%);
-            color: white;
-            padding: 22px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            font-size: 38px;
-            background: rgba(255,255,255,0.12);
-            padding: 8px 14px;
-            border-radius: 12px;
-        }
-
-        .logo-title h1 {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .logo-title p {
-            font-size: 13px;
-            opacity: 0.85;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .lang-btn {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .lang-btn:hover { background: #219653; }
-
-        .admin-nav-btn {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .admin-nav-btn:hover {
-            background: #ffffff;
-            color: #1b4d3e;
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 25px auto;
-            padding: 0 20px;
-            flex: 1;
-            width: 100%;
-        }
-
-        .search-section {
-            background: white;
-            padding: 22px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            margin-bottom: 25px;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 12px;
-        }
-
-        .search-box input {
-            flex: 1;
-            padding: 14px 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; }
+        body { background-color: #f3f6f9; color: #2c3e50; min-height: 100vh; display: flex; flex-direction: column; }
+        .app-header { background: linear-gradient(135deg, #1b4d3e 0%, #0a251c 100%); color: white; padding: 22px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.12); }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-title { display: flex; align-items: center; gap: 15px; }
+        .logo-icon { font-size: 38px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 12px; }
+        .logo-title h1 { font-size: 24px; font-weight: 700; }
+        .logo-title p { font-size: 13px; opacity: 0.85; }
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .lang-btn { background: #27ae60; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 600; cursor: pointer; }
+        .admin-nav-btn { background: rgba(255, 255, 255, 0.15); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 8px 16px; border-radius: 20px; font-weight: 600; text-decoration: none; font-size: 14px; }
+        .admin-nav-btn:hover { background: #ffffff; color: #1b4d3e; }
+        .main-container { max-width: 1200px; margin: 25px auto; padding: 0 20px; flex: 1; width: 100%; }
+        .search-section { background: white; padding: 22px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 25px; }
+        .search-box { display: flex; gap: 12px; }
+        .search-box input { flex: 1; padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; outline: none; }
         .search-box input:focus { border-color: #27ae60; }
-
-        .search-box button {
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .search-hint {
-            margin-top: 10px;
-            font-size: 13px;
-            color: #7f8c8d;
-        }
-
-        .welcome-box {
-            background: white;
-            border-radius: 16px;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            margin-bottom: 25px;
-        }
-
+        .search-box button { background-color: #27ae60; color: white; border: none; padding: 14px 28px; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; }
+        .search-hint { margin-top: 10px; font-size: 13px; color: #7f8c8d; }
+        .welcome-box { background: white; border-radius: 16px; padding: 40px 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 25px; }
         .welcome-icon { font-size: 45px; margin-bottom: 10px; }
         .welcome-box h3 { font-size: 20px; color: #1b4d3e; margin-bottom: 8px; }
         .welcome-box p { color: #7f8c8d; font-size: 14px; }
-
-        .alert-card {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            color: #856404;
-            padding: 14px 18px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 16px 20px;
-            background: #f8fafc;
-            border-bottom: 1px solid #edf2f7;
-        }
-
+        .alert-card { background: #fff3cd; border-left: 5px solid #ffc107; color: #856404; padding: 14px 18px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
+        .card { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 25px; overflow: hidden; }
+        .card-header { padding: 16px 20px; background: #f8fafc; border-bottom: 1px solid #edf2f7; }
         .card-body { padding: 20px; }
-
         #map { height: 380px; width: 100%; border-radius: 12px; }
-
         .tab-header { display: flex; background: #edf2f7; border-bottom: 2px solid #e2e8f0; }
-
-        .tab-btn {
-            flex: 1;
-            padding: 16px 20px;
-            background: transparent;
-            border: none;
-            font-size: 16px;
-            font-weight: 700;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        .tab-btn.active {
-            background: white;
-            color: #1b4d3e;
-            border-bottom: 3px solid #27ae60;
-        }
-
+        .tab-btn { flex: 1; padding: 16px 20px; background: transparent; border: none; font-size: 16px; font-weight: 700; color: #4a5568; cursor: pointer; }
+        .tab-btn.active { background: white; color: #1b4d3e; border-bottom: 3px solid #27ae60; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
-        .records-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .data-card {
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #e2e8f0;
-        }
-
+        .records-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .data-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px dashed #e2e8f0; }
         .rec-id { font-weight: 700; color: #27ae60; font-size: 15px; }
-
         .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
         .badge-success { background: #d4edda; color: #155724; }
         .badge-warning { background: #fff3cd; color: #856404; }
         .badge-danger { background: #f8d7da; color: #721c24; }
-
         .detail-line { font-size: 14px; margin-bottom: 8px; color: #4a5568; line-height: 1.5; }
         .detail-line strong { color: #2d3748; }
-
-        .location-box {
-            background: #eef9f2;
-            border: 1px solid #c8e6c9;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: 13px;
-            color: #1b5e20;
-        }
-
-        .security-box {
-            margin-top: 12px;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            background: #f8fafc;
-            border: 1px solid #edf2f7;
-        }
-
-        .masked-text {
-            background: #edf2f7;
-            padding: 2px 6px;
-            border-radius: 4px;
-            letter-spacing: 2px;
-            font-family: monospace;
-        }
-
-        .btn-secret {
-            background: #edf2f7;
-            color: #4a5568;
-            border: 1px solid #cbd5e0;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            cursor: pointer;
-            margin-top: 6px;
-        }
-
+        .location-box { background: #eef9f2; border: 1px solid #c8e6c9; padding: 10px; border-radius: 8px; margin: 10px 0; font-size: 13px; color: #1b5e20; }
+        .security-box { margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 13px; background: #f8fafc; border: 1px solid #edf2f7; }
+        .masked-text { background: #edf2f7; padding: 2px 6px; border-radius: 4px; letter-spacing: 2px; font-family: monospace; }
+        .btn-secret { background: #edf2f7; color: #4a5568; border: 1px solid #cbd5e0; padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; margin-top: 6px; }
         .feedback-body { display: flex; flex-direction: column; gap: 20px; }
         .rating-box { display: flex; flex-direction: column; gap: 8px; }
-
         .stars { display: flex; gap: 8px; font-size: 28px; cursor: pointer; color: #cbd5e0; }
         .star.active { color: #f1c40f; }
-
-        .suggestion-box textarea {
-            width: 100%;
-            margin-top: 8px;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .suggestion-box textarea:focus { border-color: #27ae60; }
-
-        .btn-submit {
-            margin-top: 10px;
-            background: #1b4d3e;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .btn-submit:hover { background: #0a251c; }
-
-        .app-footer {
-            text-align: center;
-            padding: 20px;
-            color: #718096;
-            font-size: 13px;
-            margin-top: auto;
-        }
+        .suggestion-box textarea { width: 100%; margin-top: 8px; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; outline: none; font-size: 14px; }
+        .btn-submit { margin-top: 10px; background: #1b4d3e; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+        .app-footer { text-align: center; padding: 20px; color: #718096; font-size: 13px; margin-top: auto; }
     </style>
 </head>
 <body>
@@ -422,7 +165,264 @@
         <p id="footerText">© ২০২৬ LandTrust Ecosystem | নিরাপদ ভূমি লেনদেন সেবা</p>
     </footer>
 
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}?v=6"></script>
+
+    <!-- Embedded App JS to avoid 404 / Loading Issues -->
+    <script>
+        let map;
+        let markers = [];
+        let currentLang = 'bn';
+        let currentRecords = [];
+
+        const allLandRecords = [
+          { id: "LT-BD-2026-001", dag_no: "101", khation_no: "501", owner_name: "Md. Abdur Rahim", nid_number: "1988269001234", land_area_decimal: "12.5", location_address: "ধানমন্ডি, ঢাকা দক্ষিণ সিটি কর্পোরেশন, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7461, lng: 90.3742 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-002", dag_no: "102", khation_no: "502", owner_name: "Karim Uddin", nid_number: "1990269005678", land_area_decimal: "8.0", location_address: "গুলশান, ঢাকা উত্তর সিটি কর্পোরেশন, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7925, lng: 90.4078 }, buyer_risk_report: { risk_level: "Medium", criminal_record_found: false, court_dispute: true } },
+          { id: "LT-BD-2026-003", dag_no: "103", khation_no: "503", owner_name: "Nazma Akter", nid_number: "1985269009876", land_area_decimal: "15.0", location_address: "উত্তরা সেক্টর ৪, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.8759, lng: 90.3995 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-004", dag_no: "104", khation_no: "504", owner_name: "Rafiqul Islam", nid_number: "1979269002345", land_area_decimal: "10.2", location_address: "মিরপুর ১০, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.8068, lng: 90.3687 }, buyer_risk_report: { risk_level: "High", criminal_record_found: true, court_dispute: true } },
+          { id: "LT-BD-2026-005", dag_no: "105", khation_no: "505", owner_name: "Salma Begum", nid_number: "1992269003456", land_area_decimal: "6.5", location_address: "মহাখালী, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7805, lng: 90.4023 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-006", dag_no: "106", khation_no: "506", owner_name: "Monir Hossain", nid_number: "1983269004567", land_area_decimal: "20.0", location_address: "তেজগাঁও, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7659, lng: 90.3920 }, buyer_risk_report: { risk_level: "Medium", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-007", dag_no: "107", khation_no: "507", owner_name: "Jahangir Alam", nid_number: "1975269005678", land_area_decimal: "14.0", location_address: "মতিঝিল, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7330, lng: 90.4172 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-008", dag_no: "108", khation_no: "508", owner_name: "Farhana Yasmin", nid_number: "1994269006789", land_area_decimal: "9.5", location_address: "বনানী, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7936, lng: 90.4066 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-009", dag_no: "109", khation_no: "509", owner_name: "Kamal Hossain", nid_number: "1981269007890", land_area_decimal: "11.0", location_address: "খিলগাঁও, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7534, lng: 90.4267 }, buyer_risk_report: { risk_level: "Medium", criminal_record_found: false, court_dispute: true } },
+          { id: "LT-BD-2026-010", dag_no: "110", khation_no: "510", owner_name: "Nasrin Sultana", nid_number: "1989269008901", land_area_decimal: "7.2", location_address: "বসুন্ধরা আ/এ, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.8151, lng: 90.4255 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-011", dag_no: "111", khation_no: "511", owner_name: "Shahidul Islam", nid_number: "1977269009012", land_area_decimal: "18.4", location_address: "সাভার, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.8583, lng: 90.2667 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-012", dag_no: "112", khation_no: "512", owner_name: "Rokeya Khatun", nid_number: "1984269010123", land_area_decimal: "13.0", location_address: "টঙ্গী, গাজীপুর", verification_status: "যাচাইকৃত", coordinates: { lat: 23.8890, lng: 90.4035 }, buyer_risk_report: { risk_level: "Medium", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-013", dag_no: "113", khation_no: "513", owner_name: "Anwar Hossain", nid_number: "1980269011234", land_area_decimal: "5.5", location_address: "লালবাগ, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7156, lng: 90.3887 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-014", dag_no: "114", khation_no: "514", owner_name: "Shirin Akter", nid_number: "1991269012345", land_area_decimal: "16.8", location_address: "কেরানীগঞ্জ, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.6827, lng: 90.3820 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-015", dag_no: "115", khation_no: "515", owner_name: "Belal Ahmed", nid_number: "1986269013456", land_area_decimal: "10.0", location_address: "যাত্রাবাড়ী, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7175, lng: 90.4325 }, buyer_risk_report: { risk_level: "High", criminal_record_found: true, court_dispute: false } },
+          { id: "LT-BD-2026-016", dag_no: "116", khation_no: "516", owner_name: "Tania Rahman", nid_number: "1993269014567", land_area_decimal: "12.0", location_address: "শান্তিনগর, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7392, lng: 90.4110 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-017", dag_no: "117", khation_no: "517", owner_name: "Golam Mostafa", nid_number: "1978269015678", land_area_decimal: "14.5", location_address: "রামপুরা, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7562, lng: 90.4187 }, buyer_risk_report: { risk_level: "Medium", criminal_record_found: false, court_dispute: true } },
+          { id: "LT-BD-2026-018", dag_no: "118", khation_no: "518", owner_name: "Parvin Sultana", nid_number: "1987269016789", land_area_decimal: "9.0", location_address: "মালিবাগ, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7485, lng: 90.4132 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-019", dag_no: "119", khation_no: "519", owner_name: "Sazzad Hossain", nid_number: "1982269017890", land_area_decimal: "22.0", location_address: "উত্তরা সেক্টর ১৩, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.8821, lng: 90.3894 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } },
+          { id: "LT-BD-2026-020", dag_no: "120", khation_no: "520", owner_name: "Mahbub Alam", nid_number: "1976269018901", land_area_decimal: "11.5", location_address: "মিরপুর ১, ঢাকা", verification_status: "যাচাইকৃত", coordinates: { lat: 23.7950, lng: 90.3550 }, buyer_risk_report: { risk_level: "Low", criminal_record_found: false, court_dispute: false } }
+        ];
+
+        const translations = {
+            bn: {
+                appTitle: "ল্যান্ডট্রাস্ট ডিজিটাল ভূমি সেবা",
+                appSubtitle: "স্মার্ট উপায়ে জমির মালিকানা সত্যতা যাচাই ও জালিয়াতি প্রতিরোধ পোর্টাল",
+                langBtnText: "English",
+                searchPlaceholder: "শুধু দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি লিখুন (যেমন: 101, 102)...",
+                searchBtn: "🔍 তথ্য খুঁজুন",
+                searchHint: "💡 টিপস: ১০১ থেকে ১২০ পর্যন্ত যেকোনো দাগ নম্বর দিয়ে সার্চ করুন।",
+                mapCardTitle: "📍 ভূমির সঠিক অবস্থান ও সীমানা (GIS Map)",
+                tabDeeds: "📜 দলিল ও মালিকানা সত্যতা যাচাই",
+                tabFraud: "🛡️ ক্রেতা সুরক্ষা ও জালিয়াতি প্রতিরোধ রিপোর্ট",
+                noResult: "⚠️ কোনো রেকর্ড পাওয়া যায়নি! অনুগ্রহ করে ১০১ থেকে ১২০ দাগ নম্বর দিয়ে চেষ্টা করুন।",
+                owner: "মালিকের নাম:",
+                dag: "দাগ নম্বর:",
+                khation: "খতিয়ান নম্বর:",
+                area: "জমির পরিমাণ:",
+                location: "📍 ভূমির ঠিকানা/অবস্থান:",
+                status: "যাচাই স্ট্যাটাস:",
+                nid: "এনআইডি ভেরিফিকেশন:",
+                criminal: "ক্রিমিনাল/পুলিশ রেকর্ড:",
+                court: "মামলা/বিরোধ স্ট্যাটাস:",
+                risk: "ঝুঁকি স্তর:",
+                deedStatus: "দলিল ও নামজারি সিল:",
+                maskedNotice: "🔐 গোপনীয় তথ্য (আংশিক আড়াল করা)"
+            },
+            en: {
+                appTitle: "LandTrust Digital Land Services",
+                appSubtitle: "Smart Portal for Land Verification & Anti-Fraud Protection",
+                langBtnText: "বাংলা",
+                searchPlaceholder: "Enter Dag No, Khatian or ID (e.g. 101, 102)...",
+                searchBtn: "🔍 Search Record",
+                searchHint: "💡 Tip: Search by Dag number from 101 to 120.",
+                mapCardTitle: "📍 Precise Land Location & Boundary (GIS Map)",
+                tabDeeds: "📜 Deed & Ownership Verification",
+                tabFraud: "🛡️ Pre-Purchase Risk & Fraud Shield",
+                noResult: "⚠️ No record found! Please try Dag numbers between 101 and 120.",
+                owner: "Owner Name:",
+                dag: "Dag No:",
+                khation: "Khatian No:",
+                area: "Land Area:",
+                location: "📍 Land Location:",
+                status: "Verification:",
+                nid: "NID Verification:",
+                criminal: "Criminal/Police Record:",
+                court: "Litigation Status:",
+                risk: "Risk Level:",
+                deedStatus: "Deed Authenticity:",
+                maskedNotice: "🔐 Restricted Information (Partially Masked)"
+            }
+        };
+
+        function initMap() {
+            if (!map) {
+                map = L.map('map').setView([23.8103, 90.4125], 8);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+            }
+        }
+
+        function switchTab(tab) {
+            document.getElementById('tabDeeds').classList.toggle('active', tab === 'DEEDS');
+            document.getElementById('tabFraud').classList.toggle('active', tab === 'FRAUD');
+            document.getElementById('viewDeeds').classList.toggle('active', tab === 'DEEDS');
+            document.getElementById('viewFraud').classList.toggle('active', tab === 'FRAUD');
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'bn' ? 'en' : 'bn';
+            const t = translations[currentLang];
+            document.getElementById('appTitle').innerText = t.appTitle;
+            document.getElementById('appSubtitle').innerText = t.appSubtitle;
+            document.getElementById('langBtnText').innerText = t.langBtnText;
+            document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+            document.getElementById('searchBtn').innerText = t.searchBtn;
+            document.getElementById('searchHint').innerText = t.searchHint;
+            document.getElementById('mapCardTitle').innerText = t.mapCardTitle;
+            document.getElementById('tabDeeds').innerText = t.tabDeeds;
+            document.getElementById('tabFraud').innerText = t.tabFraud;
+            renderCurrentRecords();
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const alertBox = document.getElementById('alertBox');
+            
+            if (!query) {
+                alertBox.innerText = "⚠️ অনুগ্রহ করে একটি দাগ নম্বর (যেমন: ১০১ বা 101) লিখে অনুসন্ধান করুন।";
+                alertBox.style.display = "block";
+                return;
+            }
+
+            currentRecords = allLandRecords.filter(r => {
+                return r.dag_no.toLowerCase().includes(query) ||
+                       r.khation_no.toLowerCase().includes(query) ||
+                       r.owner_name.toLowerCase().includes(query) ||
+                       r.id.toLowerCase().includes(query);
+            });
+
+            document.getElementById('welcomePlaceholder').style.display = 'none';
+            document.getElementById('mapSection').style.display = 'block';
+            document.getElementById('recordsSection').style.display = 'block';
+
+            initMap();
+            renderCurrentRecords();
+        }
+
+        function renderCurrentRecords() {
+            const t = translations[currentLang];
+            const deedsBox = document.getElementById('deedsRecordsContainer');
+            const fraudBox = document.getElementById('fraudRecordsContainer');
+            const alertBox = document.getElementById('alertBox');
+
+            if (map && markers) {
+                markers.forEach(m => map.removeLayer(m));
+                markers = [];
+            }
+
+            deedsBox.innerHTML = "";
+            fraudBox.innerHTML = "";
+
+            if (!currentRecords || currentRecords.length === 0) {
+                alertBox.innerText = t.noResult;
+                alertBox.style.display = "block";
+                document.getElementById('mapSection').style.display = 'none';
+                document.getElementById('recordsSection').style.display = 'none';
+                return;
+            }
+            alertBox.style.display = "none";
+
+            const redIcon = L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            let bounds = [];
+
+            currentRecords.forEach(r => {
+                const address = r.location_address;
+
+                if (r.coordinates && r.coordinates.lat && r.coordinates.lng) {
+                    const marker = L.marker([r.coordinates.lat, r.coordinates.lng], { icon: redIcon }).addTo(map);
+                    marker.bindPopup(`<b>${r.owner_name}</b><br>📍 ${address}<br>${t.dag} ${r.dag_no}`).openPopup();
+                    markers.push(marker);
+                    bounds.push([r.coordinates.lat, r.coordinates.lng]);
+                }
+
+                const cardDeeds = document.createElement('div');
+                cardDeeds.className = 'data-card';
+                cardDeeds.innerHTML = `
+                    <div class="card-top">
+                        <span class="rec-id">📄 রেকর্ড আইডি: ${r.id}</span>
+                        <span class="badge badge-success">${r.verification_status}</span>
+                    </div>
+                    <div class="detail-line"><strong>${t.owner}</strong> ${r.owner_name}</div>
+                    <div class="detail-line"><strong>${t.dag}</strong> ${r.dag_no} | <strong>${t.khation}</strong> ${r.khation_no}</div>
+                    <div class="detail-line"><strong>${t.area}</strong> ${r.land_area_decimal} শতাংশ</div>
+                    <div class="location-box">
+                        <strong>${t.location}</strong> ${address}
+                    </div>
+                    <div class="security-box">
+                        ✔️ <strong>${t.deedStatus}</strong> ডিজিটাল সাব-রেজিস্ট্রি সিল প্রাপ্ত ও প্রস্তুতকৃত বায়া দলিল নিবন্ধিত।
+                    </div>
+                `;
+                deedsBox.appendChild(cardDeeds);
+
+                const cardFraud = document.createElement('div');
+                cardFraud.className = 'data-card';
+
+                const risk = r.buyer_risk_report || {};
+                const riskLevel = risk.risk_level || 'Low';
+                const badgeClass = riskLevel === 'High' ? 'badge-danger' : (riskLevel === 'Medium' ? 'badge-warning' : 'badge-success');
+                const maskedNid = r.nid_number ? r.nid_number.replace(/(\d{4})\d{4}(\d{2})/, "$1-****-$2") : "1988-****-9421";
+
+                cardFraud.innerHTML = `
+                    <div class="card-top">
+                        <span class="rec-id">🛡️ নিরাপত্তা ট্র্যাকিং</span>
+                        <span class="badge ${badgeClass}">${t.risk} ${riskLevel}</span>
+                    </div>
+                    <div class="detail-line"><strong>${t.owner}</strong> ${r.owner_name}</div>
+                    <div class="location-box">
+                        <strong>${t.location}</strong> ${address}
+                    </div>
+                    <div class="detail-line"><strong>${t.nid}</strong> <span class="masked-text">${maskedNid}</span> (এনআইডি যাচাইকৃত)</div>
+                    <div class="detail-line"><strong>${t.criminal}</strong> ${risk.criminal_record_found ? '🚨 রেকর্ড বিদ্যমান' : '✅ কোনো ক্রিমিনাল রেকর্ড পাওয়া যায়নি'}</div>
+                    <div class="detail-line"><strong>${t.court}</strong> ${risk.court_dispute ? '⚠️ আদালতে মামলা চলমান' : '✅ কোনো বিরোধ নেই (Dispute-Free)'}</div>
+                    <div class="security-box">
+                        🔒 <strong>${t.maskedNotice}:</strong> কিছু তথ্য গোপন রাখা হয়েছে।
+                        <br>
+                        <button class="btn-secret" onclick="alert('গোপনীয় তথ্য দেখতে এনআইডি দিন।')">🔐 সম্পূর্ণ দেখতে লগইন করুন</button>
+                    </div>
+                `;
+                fraudBox.appendChild(cardFraud);
+            });
+
+            if (bounds.length > 0) {
+                setTimeout(() => {
+                    map.invalidateSize();
+                    map.fitBounds(bounds, { padding: [50, 50] });
+                }, 200);
+            }
+        }
+
+        function setRating(stars) {
+            document.getElementById('selectedRating').value = stars;
+            const starElements = document.querySelectorAll('.star');
+            starElements.forEach((s, index) => {
+                s.classList.toggle('active', index < stars);
+            });
+        }
+
+        function submitFeedback() {
+            const rating = document.getElementById('selectedRating').value;
+            const msg = document.getElementById('feedbackMessage').value.trim();
+            if (rating === "0" && !msg) {
+                alert("অনুগ্রহ করে রেটিং অথবা মন্তব্য প্রদান করুন।");
+                return;
+            }
+            alert(`ধন্যবাদ! আপনার মতামত সফলভাবে জমা হয়েছে।`);
+            document.getElementById('feedbackMessage').value = "";
+        }
+    </script>
 </body>
 </html>
