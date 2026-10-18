@@ -9,18 +9,29 @@ ADMIN_USER = "admin"
 ADMIN_PASS = "landtrust2026"
 
 def load_records():
-    json_path = os.path.join(os.path.dirname(__file__), 'data', 'land_records.json')
+    # Base directory level mapping for Vercel
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    json_path = os.path.join(base_dir, 'data', 'land_records.json')
+    
     try:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        if os.path.exists(json_path):
+            with open(json_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        else:
+            print(f"File not found at {json_path}")
+            return []
     except Exception as e:
         print(f"Error loading records: {e}")
         return []
 
 def save_records(records):
-    json_path = os.path.join(os.path.dirname(__file__), 'data', 'land_records.json')
-    with open(json_path, 'w', encoding='utf-8') as f:
-        json.dump(records, f, ensure_ascii=False, indent=2)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    json_path = os.path.join(base_dir, 'data', 'land_records.json')
+    try:
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(records, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Error saving records: {e}")
 
 @app.route('/')
 def home():
@@ -98,4 +109,3 @@ def search():
 
 if __name__ == '__main__':
     app.run(debug=True)
-    

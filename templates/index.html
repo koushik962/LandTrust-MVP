@@ -73,7 +73,7 @@
         .security-box { margin-top: 14px; padding: 14px; border-radius: 10px; font-size: 13px; background: #f8fafc; border: 1px solid #e2e8f0; }
         .masked-text { background: #e2e8f0; padding: 2px 8px; border-radius: 4px; letter-spacing: 2px; font-family: monospace; font-weight: 600; }
 
-        /* Rating & Feedback Box (Gorgeous Modern UI) */
+        /* Rating & Feedback Box */
         .feedback-section { margin-top: 40px; margin-bottom: 30px; }
         .feedback-card { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #cbd5e1; border-radius: 20px; box-shadow: 0 10px 35px rgba(0,0,0,0.06); overflow: hidden; }
         .feedback-header { background: #0d3b2e; color: white; padding: 20px 25px; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
@@ -123,7 +123,7 @@
         <!-- Search Bar Section -->
         <section class="search-section">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="শুধু দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি লিখুন (যেমন: 101, 102)...">
+                <input type="text" id="searchInput" placeholder="শুধু দাগ নম্বর, খতিয়ান বা রেকর্ড আইডি লিখুন (যেমন: 101, 102)..." onkeypress="if(event.key === 'Enter') performSearch()">
                 <button onclick="performSearch()" id="searchBtn">🔍 তথ্য খুঁজুন</button>
             </div>
             <p class="search-hint" id="searchHint">💡 টিপস: অনুসন্ধানের জন্য যেকোনো একটি দাগ নম্বর বা খতিয়ান দিয়ে প্রবেশ করুন।</p>
@@ -172,7 +172,7 @@
             <p>আপনার কাঙ্ক্ষিত দাগ নম্বর বা খতিয়ান দিলে GIS ম্যাপের মাধ্যমে সঠিক অবস্থান, মালিকানা ও জালিয়াতি সতর্কতা রিপোর্ট দেখানো হবে।</p>
         </div>
 
-        <!-- Rating & Feedback Section (Enhanced UI) -->
+        <!-- Rating & Feedback Section -->
         <section class="feedback-section">
             <div class="feedback-card">
                 <div class="feedback-header">
@@ -209,6 +209,6 @@
 
     <!-- Leaflet JS & App JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}?v=12"></script>
+    <script src="{{ url_for('static', filename='app.js') }}?v=15"></script>
 </body>
 </html>
